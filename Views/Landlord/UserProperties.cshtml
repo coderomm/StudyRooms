@@ -1,0 +1,134 @@
+﻿@model IEnumerable<StudentsRooms.Models.Property_Table>
+
+@{
+    ViewBag.Title = "UserProperties";
+}
+
+<!-- My Propertiess start -->
+<div class="content-area my-properties my-3 my-sm-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <!-- User account box start -->
+                <div class="user-account-box mb-50">
+                    <div class="content">
+                        <ul>
+                            <li>
+                                <a href="~/Landlord/Dashboard/">
+                                    <i class="flaticon-social"></i>Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a href="~/Landlord/UserProperties/" class="active">
+                                    <i class="flaticon-apartment"></i>My Properties
+                                </a>
+                            </li>
+                            <li>
+                                <a href="~/Landlord/AddProperty/">
+                                    <i class="fa fa-plus"></i>Submit New Property
+                                </a>
+                            </li>
+                            <li>
+                                <a href="~/Landlord/changePassword/">
+                                    <i class="flaticon-security"></i>Change Password
+                                </a>
+                            </li>
+                            <li>
+                                <a href="~/User/Logout/">
+                                    <i class="flaticon-sign-out-option"></i>Logout
+                                </a>
+                            </li>
+
+                        </ul>
+                    </div>
+                </div>
+                <!-- User account box end -->
+            </div>
+            <div class="col-lg-8 col-md-12 col-sm-12">
+                <div class="main-title-4">
+                    <h1 class="mb-4"><span>My</span> Properties</h1>
+                </div>
+                <!-- table start -->
+                <table class="manage-table responsive-table">
+                    <tbody>
+
+                        @foreach (var item in Model)
+                        {
+                            <tr class="d-flex mb-3">
+                                <td class="photo pe-3">
+                                    <img src="@Url.Content("~/Content/images/propertyImages/"+item.property_image1)" alt="properties" class="img-fluid">
+
+                                </td>
+                                <td class="title-container pe-3 align-self-center">
+                                    <div class="title">
+                                        <h4><a href="#">@Html.DisplayFor(modelItem => item.property_name) </a></h4>
+                                        <p><i class="fa fa-map-marker"></i> @Html.DisplayFor(modelItem => item.property_address) </p>
+                                        <p class="table-property-price mb-0">Rs @Html.DisplayFor(modelItem => item.property_rent) / monthly</p>
+                                    </div>
+                                </td>
+                                <td class="expire-date pe-3 align-self-center">@Html.DisplayFor(modelItem => item.rts)</td>
+                                <td class="action align-self-center">
+                                    <a href="@Url.Action("UpdateProperty", "Landlord",new {id=item.property_id })">
+                                        <i class="fa fa-pencil"></i>
+                                        Edit
+                                    </a>
+                                    <a href="@Url.Action("ShowProperty", "Landlord",new {id=item.property_id})">
+                                        <i class="fa fa-eye"></i>
+                                        Show
+                                    </a>
+                                    <a href="@Url.Action("DeleteProperty", "Landlord",new {id=item.property_id })">
+                                        <i class="fa fa-remove"></i>
+                                        Delete
+                                    </a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <!-- table end -->
+            </div>
+        </div>
+    </div>
+
+    <div id="myModal" class="modal fade">
+        <div class="modal-dialog modal-confirm">
+            <div class="modal-content">
+                <div class="modal-header flex-column">
+                    <div class="icon-box">
+                        <i class="material-icons">&#xE5CD;</i>
+                    </div>
+                    <h4 class="modal-title w-100">Are you sure?</h4>
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <p>Do you really want to delete these records? This process cannot be undone.</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-danger">Delete</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+<!-- My Propertiess end -->
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    <div class="text-center">
+        <!-- Button HTML (to Trigger Modal) -->
+        <a href="#myModal" class="trigger-btn" data-toggle="modal">Click to Open Confirm Modal</a>
+    </div>
+
+    <!-- Modal HTML -->
+    
+    </body>
+</html>

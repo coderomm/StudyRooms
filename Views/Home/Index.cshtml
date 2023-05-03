@@ -1,0 +1,432 @@
+﻿@model IEnumerable<StudentsRooms.Models.Property_Table>
+@{
+    ViewBag.Title = "Home Page";
+}
+
+<!-- Banner start -->
+<div class="banner" id="banner">
+    <div id="carousel-example-generic" class="carousel slide" data-ride="carousel">
+        <!-- Wrapper for slides -->
+        <div class="carousel-inner" role="listbox">
+            <div class="item item-100vh active">
+                <img src="~/Content/img/banner/img-2.jpg" alt="banner-slider-1">
+                <div class="carousel-caption banner-slider-inner">
+                    <div class="banner-content container banner-content-left banner-info-section">
+                        <h1>Find your Dream House</h1>
+                        <p>Find new & featured property located in your local city.</p>
+                        <div class="tabbing tab-btn banner-tab-btn">
+
+                            <div class="tab-content" id="myTabContent">
+                                <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                    <div class="accordion accordion-flush" id="accordionFlushExample7">
+                                        <div class="search-area">
+                                            <div class="search-area-inner">
+                                                @using (Html.BeginForm("Index", "ExploreProperties", FormMethod.Get))
+                                                {
+
+                                                    <div class="w-17 form-group b-right">
+                                                        <select class="selectpicker search-fields" name="property_purpose" id="property_purpose">
+                                                            <option value="Sale">Buy</option>
+                                                            <option value="Rent">Rent</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="w-17 form-group b-right">
+                                                        <select class="selectpicker search-fields" name="property_type" id="property_type">
+                                                            <option value="" style="color: #95c41f;">Select Type</option>
+                                                            <option value="1">Apartment</option>
+                                                            <option value="2">Family House</option>
+                                                            <option value="3">PG</option>
+                                                            <option value="4">Commercial</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="w-17 form-group b-right">
+                                                        <select class="selectpicker search-fields" name="property_room_no" id="property_room_no">
+                                                            <option value="" style="color: #95c41f;">Select Rooms</option>
+                                                            <option value="1">1 Room</option>
+                                                            <option value="2">2 Rooms</option>
+                                                            <option value="3">3 Rooms</option>
+                                                            <option value="4">4 Rooms</option>
+                                                            <option value="5">5 Rooms</option>
+                                                        </select>
+                                                    </div>
+                                                    <div class="w-32 form-group b-right">
+                                                        <input type="text" id="DistrictName" name="DistrictName" class="input-text search-fields" placeholder="Enter City">
+                                                        <input type="hidden" id="DistrictId" name="DistrictId" />
+                                                    </div>
+                                                    <div class="w-17 w-17-2 form-group b-right b-right2">
+                                                        <button class="search-button">Search</button>
+                                                    </div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Banner end -->
+<!-- Featured properties start -->
+<div class="content-area featured-properties">
+    <div class="container">
+        <!-- Main title -->
+        <div class="main-title">
+            <h1>Featured Properties</h1>
+            <p class="mb-30">Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+            <ul class="list-inline-listing filters filters-listing-navigation">
+                <li class="active btn filtr-button filtr" data-filter="all">All</li>
+                <li data-filter="1" class="btn btn-inline filtr-button filtr">Family House</li>
+                <li data-filter="2" class="btn btn-inline filtr-button filtr">PG</li>
+                <li data-filter="3" class="btn btn-inline filtr-button filtr">Apartment</li>
+                <li data-filter="4" class="btn btn-inline filtr-button filtr">Commercial</li>
+            </ul>
+        </div>
+        <div class="row wow fadeInUp delay-04s">
+            <div class="filtr-container">
+                @foreach (var item in ViewBag.PropertiesJoinData)
+                {
+                    <div class="col-lg-4 col-md-6 col-sm-12 col-xs-12 filtr-item" data-category="@item.property_type">
+                        <div class="property fp2">
+                            <!-- Property img -->
+                            <div class="property-img">
+                                <div class="property-tag button alt featured">Featured</div>
+                                <div class="property-tag button sale">For @item.property_purpose</div>
+                                <div class="property-price">
+                                    @{
+                                        if (@item.property_purpose == "Sale")
+                                        {
+                                            <text>Rs @item.property_price</text>
+                                        }
+                                        else
+                                        {
+                                            <text>Rs @item.property_rent / month</text>
+                                        }
+                                    }
+
+                                </div>
+                                <img src="@Url.Content("~/Content/images/propertyImages/"+ @item.property_image1)" alt="property image" class="img-fluid">
+
+                                <div class="property-overlay">
+                                    <a href="@Url.Action("PropertyDetail", "Home",new { id = item.property_id })" class="overlay-link">
+                                        <i class="fa fa-link"></i>
+                                    </a>
+                                    @*<a href="@Url.Action("PropertyDetail", "Home",new { id = item.property_id })" class="overlay-link">
+                                            <i class="fa fa-link"></i>
+                                        </a>
+                                        <a href="@Url.Action("PropertyDetail", "Home",new { id = item.property_id })" class="overlay-link">
+                                            <i class="fa fa-link"></i>
+                                        </a>*@
+                                    <a class="overlay-link property-video" title="Lexus GS F">
+                                        <i class="fa fa-video-camera"></i>
+                                    </a>
+                                    <div class="property-magnify-gallery">
+                                        <a href="~/Content/images/propertyImages/@item.property_image1" class="overlay-link">
+                                            <i class="fa fa-expand"></i>
+                                        </a>
+                                        <a href="~/Content/images/propertyImages/@item.property_image2" class="hidden"></a>
+                                        <a href="~/Content/images/propertyImages/@item.property_image3" class="hidden"></a>
+                                        <a href="~/Content/images/propertyImages/@item.property_image4" class="hidden"></a>
+                                        <a href="~/Content/images/propertyImages/@item.property_image5" class="hidden"></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- Property content -->
+                            <div class="property-content">
+                                <!-- info -->
+                                <div class="info">
+                                    <!-- title -->
+                                    <h1 class="title">
+                                        <a href="properties-details.html">@item.property_name</a>
+                                    </h1>
+                                    <!-- Property address -->
+                                    <h3 class="property-address">
+                                        <a href="properties-details.html">
+                                            <i class="fa fa-map-marker"></i>@item.property_address,
+                                        </a>
+                                    </h3>
+                                    <!-- Facilities List -->
+                                    <ul class="facilities-list clearfix">
+                                        <li>
+                                            <i class="flaticon-square-layouting-with-black-square-in-east-area"></i>
+                                            <span>@item.property_size sq ft</span>
+                                        </li>
+                                        <li>
+                                            <i class="flaticon-bed"></i>
+                                            <span>@item.property_room_no Beds</span>
+                                        </li>
+                                        <li>
+                                            <i class="flaticon-holidays"></i>
+                                            <span> @item.property_bathroom_no Baths</span>
+                                        </li>
+                                        <li>
+                                            <i class="flaticon-building"></i>
+                                            <span> @item.property_balcony_no Balcony</span>
+                                        </li>
+                                        <li>
+                                            <i class="flaticon-monitor"></i>
+                                            <span> @item.property_age Years Old </span>
+                                        </li>
+                                        @{
+                                            if (@item.property_parking == true)
+                                            {
+                                                <li><i class="flaticon-transport"></i><span>Parking</span></li>
+                                            }
+                                            else
+                                            {
+                                            }
+                                        }
+                                    </ul>
+                                </div>
+                                <!-- Property footer -->
+                                <div class="property-footer">
+                                    <span class="left">
+                                        <a href="#"><i class="fa fa-user"></i>@item.owner_name</a>
+                                    </span>
+                                    <span class="right">
+                                        <i class="fa fa-calendar"></i>@item.rts Days ago
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Property Video Modal -->
+                    <div class="modal property-modal fade" id="propertyModal" role="dialog" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <button type="button" class="close" data-bs-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+                                <div class="modal-body">
+                                    <div class="row modal-raw g-0">
+                                        <div class="col-lg-5 modal-left">
+                                            <div class="modal-left-content">
+                                                <div id="carouselExampleControlsNoTouching" class="carousel slide" data-bs-touch="false" data-bs-interval="false">
+                                                    <div class="carousel-inner">
+                                                        <div class="carousel-item active">
+                                                            <video class="modalIframe w-100" width="320" height="240" controls allowfullscreen="">
+                                                                <source src="@Url.Content("~/Content/VideoFileUpload/" + @item.property_video)" type="video/mp4">
+                                                            </video>
+                                                            @*<iframe class="modalIframe w-100" src="https://www.youtube.com/embed/V7IrnC9MISU" allowfullscreen=""></iframe>*@
+                                                        </div>
+                                                        <div class="carousel-item">
+                                                            <img src="@Url.Content("~/Content/images/propertyImages/" + @item.property_image1)" alt="model-photo" class="img-fluid w-100">
+                                                        </div>
+                                                        <div class="carousel-item">
+                                                            <img src="@Url.Content("~/Content/images/propertyImages/" + @item.property_image2)" alt="slider-photo" class="img-fluid w-100">
+                                                        </div>
+                                                    </div>
+                                                    <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="prev">
+                                                        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Previous</span>
+                                                    </button>
+                                                    <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControlsNoTouching" data-bs-slide="next">
+                                                        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                                                        <span class="visually-hidden">Next</span>
+                                                    </button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-7 modal-right">
+                                            <div class="modal-right-content bg-white">
+                                                <div class="heading comon-section">
+                                                    <h2>Find Your Dream House</h2>
+                                                    <h2>@item.property_name</h2>
+                                                    <p class="location">@item.property_address,</p>
+                                                </div>
+                                                <div class="features comon-section">
+                                                    <strong class="price">
+                                                        Rs @item.property_price
+                                                    </strong>
+                                                    <section>
+                                                        <h3>Features</h3>
+                                                    </section>
+                                                    <ul class="bullets">
+                                                        @{
+                                                            if (@item.property_ac == true)
+                                                            {
+                                                                <li><i class="flaticon-air-conditioner"></i>Air conditioning</li>
+                                                            }
+                                                            else
+                                                            {
+                                                            }
+                                                        }
+                                                        @{
+                                                            if (@item.property_wifi == true)
+                                                            {
+                                                                <li><i class="flaticon-wifi"></i>Wifi</li>
+                                                            }
+                                                            else
+                                                            {
+                                                            }
+                                                        }
+                                                        @{
+                                                            if (@item.property_parking == true)
+                                                            {
+                                                                <li><i class="flaticon-transport"></i>Parking</li>
+                                                            }
+                                                            else
+                                                            {
+                                                            }
+                                                        }
+                                                        <li><i class="flaticon-old-telephone-ringing"></i>@item.property_balcony_no Balcony</li>
+                                                        <li><i class="flaticon-old-telephone-ringing"></i>@item.property_room_no BedRooms</li>
+                                                    </ul>
+                                                </div>
+                                                <div class="0verview comon-section cs-none">
+                                                    <section>
+                                                        <h3>Overview</h3>
+                                                    </section>
+                                                    <dl>
+                                                        <dt>City</dt>
+                                                        <dd>@item.property_city</dd>
+                                                        <dt>District</dt>
+                                                        <dd>@item.property_district</dd>
+                                                        <dt>State</dt>
+                                                        <dd>@item.property_state</dd>
+                                                        <dt>Age</dt>
+                                                        <dd>@item.property_age years old</dd>
+                                                        <dt>@item.property_price</dt>
+                                                        <dd>@item.property_price</dd>
+                                                    </dl>
+                                                    <a href="~/Home/PropertyDetail/@item.property_id" class="btn button-sm button-theme">Show Detail</a>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                }
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Featured properties end -->
+<!-- Recently properties start -->
+<div class="content-area comon-slick recently-properties clearfix">
+    <div class="container">
+        <!-- Main title -->
+        <div class="main-title">
+            <h1>Recently Properties</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+        </div>
+        @foreach (var item in ViewBag.PropertiesJoinData)
+        {
+            <div class="slick row comon-slick-inner" data-slick='{"slidesToShow": 4, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
+                <div class="item slide-box wow fadeInRight delay-04s">
+                    <div class="property-2 mb-30">
+                        <div class="property-inner">
+                            <div class="property-overflow">
+                                <div class="property-photo">
+                                    <img src="@Url.Content("~/Content/images/propertyImages/"+ @item.property_image1)" alt="property image" class="img-fluid">
+                                    <div class="listing-badges">
+                                        <span class="featured active">For @item.property_purpose</span>
+                                    </div>
+                                    <div class="price-ratings">
+                                        <div class="price">Rs @item.property_price @item.property_rent</div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- content -->
+                            <div class="content">
+                                <!-- title -->
+                                <h4 class="title">
+                                    <a href="properties-details.html">@item.property_name</a>
+                                </h4>
+                                <!-- Property address -->
+                                <h3 class="property-address">
+                                    <a href="properties-details.html">
+                                        <i class="fa fa-map-marker"></i>@item.property_address
+                                    </a>
+                                </h3>
+                            </div>
+                            <!-- Facilities List -->
+                            <ul class="facilities-list clearfix">
+                                <li>
+                                    <i class="flaticon-square-layouting-with-black-square-in-east-area"></i>
+                                    <span>@item.property_size sq ft</span>
+                                </li>
+                                <li>
+                                    <i class="flaticon-bed"></i>
+                                    <span>@item.property_room_no Bed</span>
+                                </li>
+                                <li>
+                                    <i class="flaticon-holidays"></i>
+                                    <span>@item.property_bathroom_no Bath</span>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+<!-- Recently Partners block end -->
+<!-- Counters 3 strat -->
+<div class="counters-3">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-5 col-md-12 col-sm-12 col-xs-12 align-self-center wow fadeInLeft delay-04s">
+                <div class="sec-title-three">
+                    <div class="main-title main-title-5 mb-0">
+                        <h1>More than 10 Years of Experience</h1>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-7 col-md-12 col-sm-12 col-xs-12 wow fadeInRight delay-04s">
+                <div class="counters-3-inner">
+                    <div class="counter-box-3 d-flex">
+                        <i class="flaticon-symbol-1"></i>
+                        <div class="detail">
+                            <h1 class="counter">967</h1>
+                            <p>Listings For Rent</p>
+                        </div>
+                    </div>
+                    <div class="counter-box-3 d-flex">
+                        <i class="flaticon-people"></i>
+                        <div class="detail">
+                            <h1 class="counter">396</h1>
+                            <p>Landlords</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Counters 3 end -->
+<!-- Popular places start -->
+<div class="popular-places comon-slick content-area">
+    <div class="container">
+        <!-- Main title -->
+        <div class="main-title">
+            <h1>Popular Places</h1>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod.</p>
+        </div>
+        <div class="slick row wow fadeInUp delay-04s" data-slick='{"slidesToShow": 3, "responsive":[{"breakpoint": 1024,"settings":{"slidesToShow": 2}}, {"breakpoint": 768,"settings":{"slidesToShow": 1}}]}'>
+            <div class="item">
+                <div class="popular-places-box-2">
+                    <img src="~/Content/img/popular-places/popular-places-4.jpg" alt="photo" class="img-fluid w-100">
+                    <div class="ling-section">
+                        <h3>
+                            <a href="properties-details.html">Tokyo City</a>
+                        </h3>
+                        <p class="member-socials">Friendly neighborhood</p>
+                        <a href="properties-details.html" class="read-more-btn">Read More</a>
+                    </div>
+                    <div class="listings_no">47 Properties</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Popular places end -->

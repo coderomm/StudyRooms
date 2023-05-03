@@ -1,0 +1,375 @@
+﻿@model IEnumerable<StudentsRooms.Models.Property_Table>
+
+@{
+    ViewBag.Title = "Explore Properties";
+}
+
+<!-- Properties section body start -->
+<div class="properties-section-body content-area my-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-12 col-xs-12">
+                <!-- Option bar start -->
+                <div class="option-bar">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-5 col-sm-5">
+                            <h4>
+                                <span class="heading-icon">
+                                    <i class="fa fa-th-list"></i>
+                                </span>
+                                <span class="title">Properties List</span>
+                            </h4>
+                        </div>
+                        <div class="col-lg-7 col-md-7 col-sm-7">
+                            <div class="sorting-options advanced-search">
+
+                                <select id="sortPropertiesv" class="selectpicker search-fields sorting" name="SortBy" onchange="document.location.href = '/ExploreProperties/index/'+this.options[this.selectedIndex].value;)">
+
+
+
+                                    <option value="1">New To Old</option>
+                                    <option value="2">Old To New</option>
+                                    <option value="3">Properties (High To Low)</option>
+                                    <option value="4">Properties (Low To High)</option>
+                                </select>
+
+
+
+                                <select onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+                                    <option value="">Select...</option>
+                                    <option value="/ExploreProperties/Index/SortBy?Recent">New To Old</option>
+                                    <option value="/ExploreProperties/Index/SortBy?Oldest">Old To New</option>
+                                    <option value="/ExploreProperties/Index/SortBy?HighToLow">Properties (High To Low)</option>
+                                    <option value="/ExploreProperties/Index/SortBy?LowToHigh">Properties (Low To High)</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Option bar end -->
+                <!-- Property start -->
+                @foreach (var item in ViewBag.PropertiesJoinData)
+                {
+                    <div id="RAMListPlaceHolder" class="property row g-0 fp2 clearfix wow fadeInUp delay-03s">
+                        <div class="col-lg-5 col-md-5 col-sm-12">
+                            <!-- Property img -->
+                            <div class="property-img">
+                                <div class="property-tag button alt featured">Featured</div>
+                                <div class="property-tag button sale">For @item.property_purpose</div>
+                                <div class="property-price">Rs @item.property_rent</div>
+                                <img src="@Url.Content("~/Content/images/propertyImages/"+ @item.property_image1)" alt="property image" class="i~/Content/img-responsive hp-1">
+
+                                <div class="property-overlay">
+                                    <a href="properties-details.html" class="overlay-link">
+                                        <i class="fa fa-link"></i>
+                                    </a>
+                                    <a class="overlay-link property-video" title="Lexus GS F">
+                                        <i class="fa fa-video-camera"></i>
+                                    </a>
+                                    <div class="property-magnify-gallery">
+                                        <a href="~/Content/img/properties/properties-1.jpg" class="overlay-link">
+                                            <i class="fa fa-expand"></i>
+                                        </a>
+                                        <a href="~/Content/img/properties/properties-2.jpg" class="hidden"></a>
+                                        <a href="~/Content/img/properties/properties-3.jpg" class="hidden"></a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-7 col-md-7 col-sm-12 property-content">
+                            <div class="info">
+                                <!-- title -->
+                                <h1 class="title">
+                                    <a href="properties-details.html">@item.property_name</a>
+                                </h1>
+                                <!-- Property address -->
+                                <h3 class="property-address">
+                                    <a href="properties-details.html">
+                                        <i class="fa fa-map-marker"></i>@item.property_address,
+                                    </a>
+                                </h3>
+                                <!-- Facilities List -->
+                                <ul class="facilities-list clearfix">
+                                    <li>
+                                        <i class="flaticon-square-layouting-with-black-square-in-east-area"></i>
+                                        <span>@item.property_size sq ft</span>
+                                    </li>
+                                    <li>
+                                        <i class="flaticon-bed"></i>
+                                        <span>@item.property_room_no Beds</span>
+                                    </li>
+                                    <li>
+                                        <i class="flaticon-holidays"></i>
+                                        <span> @item.property_bathroom_no Baths</span>
+                                    </li>
+                                    <li>
+                                        <i class="flaticon-building"></i>
+                                        <span> @item.property_balcony_no Balcony</span>
+                                    </li>
+                                    <li>
+                                        <i class="flaticon-monitor"></i>
+                                        <span> @item.property_age Years Old </span>
+                                    </li>
+
+                                    <li>
+                                        <i class="flaticon-vehicle"></i>
+                                        <span> @item.property_parking Parking</span>
+                                    </li>
+                                </ul>
+                                <!-- Property footer -->
+                            </div>
+                            <div class="property-footer">
+                                <span class="left">
+                                    <a href="#"><i class="fa fa-user"></i>@item.owner_name</a>
+                                </span>
+                                <span class="right">
+                                    <i class="fa fa-calendar"></i>@item.rts Days ago
+                                </span>
+                            </div>
+                        </div>
+                    </div>
+                }
+                <!-- Property end -->
+                <!-- Pagination box start -->
+                <div class="pagination-box text-center">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link" href="#">Prev</a>
+                            </li>
+                            <li class="page-item"><a class="page-link  active" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <!-- Pagination box end -->
+            </div>
+
+            <div class="col-lg-4 col-md-12 col-xs-12">
+                <!-- Advanced search start -->
+                <div class="sidebar-widget advanced-search">
+                    <div class="main-title-4">
+                        <h1>Advanced  Search</h1>
+                    </div>
+                    <form method="GET">
+                        <div class="form-group">
+                            <select class="selectpicker search-fields" name="property status">
+                                <option>Property Status</option>
+                                <option>For Sale</option>
+                                <option>For Rent</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select class="selectpicker search-fields" name="location">
+                                <option>Location</option>
+                                <option>United States</option>
+                                <option>United Kingdom</option>
+                                <option>American Samoa</option>
+                                <option>Belgium</option>
+                                <option>Cameroon</option>
+                                <option>Canada</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select class="selectpicker search-fields" name="property types">
+                                <option>Property Types</option>
+                                <option>Residential</option>
+                                <option>Commercial</option>
+                                <option>Land</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <select class="selectpicker search-fields" name="area from">
+                                <option>Area From</option>
+                                <option>1000</option>
+                                <option>800</option>
+                                <option>600</option>
+                                <option>400</option>
+                                <option>200</option>
+                                <option>100</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <select class="selectpicker search-fields" name="bedrooms">
+                                        <option>Bedrooms</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                        <option>7</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <select class="selectpicker search-fields" name="bathrooms">
+                                        <option>Bathrooms</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                        <option>6</option>
+                                        <option>7</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <select class="selectpicker search-fields" name="balcony">
+                                        <option>Balcony</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <select class="selectpicker search-fields" name="garage">
+                                        <option>Garage</option>
+                                        <option>1</option>
+                                        <option>2</option>
+                                        <option>3</option>
+                                        <option>4</option>
+                                        <option>5</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="range-slider">
+                            <label>Area</label>
+                            <div data-min="0" data-max="10000" data-unit="Sq ft" data-min-name="min_area" data-max-name="max_area" class="range-slider-ui ui-slider" aria-disabled="false"></div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="range-slider">
+                            <label>Price</label>
+                            <div data-min="0" data-max="150000" data-unit="USD" data-min-name="min_price" data-max-name="max_price" class="range-slider-ui ui-slider" aria-disabled="false"></div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group mb-0">
+                            <button type="submit" class="button-md button-theme btn-3 w-100">Search</button>
+                        </div>
+                    </form>
+                </div>
+                <!-- Advanced search end -->
+                <!-- Category posts start -->
+                <div class="sidebar-widget category-posts">
+                    <div class="main-title-4">
+                        <h1>Popular Category</h1>
+                    </div>
+                    <ul class="list-unstyled list-cat">
+                        <li><a href="#">Single Family </a> <span>(45)  </span></li>
+                        <li><a href="#">Apartment  </a> <span>(21)  </span></li>
+                        <li><a href="#">Condo </a> <span>(23)  </span></li>
+                        <li><a href="#">Multi Family </a> <span>(19)  </span></li>
+                        <li><a href="#">Villa </a> <span>(19)  </span></li>
+                        <li><a href="#">Other  </a> <span>(22)  </span></li>
+                    </ul>
+                </div>
+                <!-- Category posts end -->
+                <!-- Popular posts start -->
+                <div class="sidebar-widget popular-posts">
+                    <div class="main-title-4">
+                        <h1>Recent Properties</h1>
+                    </div>
+                    <div class="d-flex mb-3 popular-posts-box">
+                        <a class="pr-3" href="properties-details.html">
+                            <img src="~/Content/img/properties/small-properties-2.jpg" alt="small-photo" class="flex-shrink-0 me-3">
+                        </a>
+                        <div class="detail align-self-center">
+                            <h4>
+                                <a href="properties-details.html">Modern Family Home</a>
+                            </h4>
+                            <div class="listing-post-meta">
+                                Sep 18, 2021 | <a href="#">$470,00</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex mb-3 popular-posts-box">
+                        <a class="pr-3" href="properties-details.html">
+                            <img src="~/Content/img/properties/small-properties-1.jpg" alt="small-photo" class="flex-shrink-0 me-3">
+                        </a>
+                        <div class="detail align-self-center">
+                            <h4>
+                                <a href="properties-details.html">Sweet Family Home</a>
+                            </h4>
+                            <div class="listing-post-meta">
+                                Aug 18, 2020 | <a href="#">$485,00</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex popular-posts-box">
+                        <a class="pr-3" href="properties-details.html">
+                            <img src="~/Content/img/properties/small-properties-3.jpg" alt="small-photo" class="flex-shrink-0 me-3">
+                        </a>
+                        <div class="detail align-self-center">
+                            <h4>
+                                <a href="properties-details.html">Beautful Single Home</a>
+                            </h4>
+                            <div class="listing-post-meta">
+                                Aug Feb, 2021 | <a href="#">$850,00</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Popular posts end -->
+                <!-- Helping box Start -->
+                <div class="sidebar-widget helping-box clearfix">
+                    <div class="main-title-4">
+                        <h1>Helping Center</h1>
+                    </div>
+                    <div class="helping-center">
+                        <div class="icon"><i class="fa fa-map-marker"></i></div>
+                        <h4>Address</h4>
+                        <p>123 Kathal St. Tampa City,</p>
+                    </div>
+                    <div class="helping-center">
+                        <div class="icon"><i class="fa fa-phone"></i></div>
+                        <h4>Phone</h4>
+                        <p><a href="tel:+55-417-634-7071">+55 417 634 7071</a> </p>
+                    </div>
+                </div>
+                <!-- Helping box end -->
+                <!-- Latest reviews start -->
+                <div class="sidebar-widget latest-reviews mb-30">
+                    <div class="main-title-4">
+                        <h1>Latest  Reviews</h1>
+                    </div>
+                    <div class="latest-reviews-box d-flex mb-4">
+                        <a class="pr-3" href="#">
+                            <img src="~/Content/img/avatar/avatar-1.jpg" alt="avatar" class="flex-shrink-0 me-3">
+                        </a>
+                        <div class="detail">
+                            <h3><a href="#">John Antony</a></h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiamrisus tortor, accumsan at,</p>
+                        </div>
+                    </div>
+                    <div class="latest-reviews-box d-flex">
+                        <a class="pr-3" href="#">
+                            <img src="~/Content/img/avatar/avatar-2.jpg" alt="avatar" class="flex-shrink-0 me-3">
+                        </a>
+                        <div class="detail">
+                            <h3><a href="#">Karen Paran</a></h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiamrisus tortor, accumsan at,</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Latest reviews end -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Properties section body end -->

@@ -1,0 +1,349 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="StudentsRoomsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="District">
+          <Key>
+            <PropertyRef Name="DistrictId" />
+          </Key>
+          <Property Name="DistrictId" Type="int" Nullable="false" />
+          <Property Name="DistrictName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="StateId" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Owner_Table">
+          <Key>
+            <PropertyRef Name="owner_id" />
+          </Key>
+          <Property Name="owner_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="owner_name" Type="nvarchar(max)" />
+          <Property Name="owner_mobile1" Type="nvarchar(max)" />
+          <Property Name="owner_mobile2" Type="nvarchar(max)" />
+          <Property Name="owner_email" Type="nvarchar(max)" />
+          <Property Name="owner_password" Type="nvarchar(max)" />
+          <Property Name="status" Type="nvarchar(max)" />
+          <Property Name="rts" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Property_Table">
+          <Key>
+            <PropertyRef Name="property_id" />
+          </Key>
+          <Property Name="property_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="owner_id" Type="int" />
+          <Property Name="property_name" Type="nvarchar(max)" />
+          <Property Name="property_purpose" Type="nvarchar(max)" />
+          <Property Name="property_type" Type="nvarchar(max)" />
+          <Property Name="property_price" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="property_rent" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="property_size" Type="nvarchar(max)" />
+          <Property Name="property_room_no" Type="int" />
+          <Property Name="property_bathroom_no" Type="int" />
+          <Property Name="property_kitchen_no" Type="int" />
+          <Property Name="property_balcony_no" Type="int" />
+          <Property Name="property_age" Type="decimal" Precision="18" Scale="0" />
+          <Property Name="property_image1" Type="nvarchar(max)" />
+          <Property Name="property_image2" Type="nvarchar(max)" />
+          <Property Name="property_image3" Type="nvarchar(max)" />
+          <Property Name="property_image4" Type="nvarchar(max)" />
+          <Property Name="property_image5" Type="nvarchar(max)" />
+          <Property Name="property_address" Type="nvarchar(max)" />
+          <Property Name="property_city" Type="int" />
+          <Property Name="property_district" Type="int" />
+          <Property Name="property_state" Type="int" />
+          <Property Name="property_postal_code" Type="int" />
+          <Property Name="property_parking" Type="bit" />
+          <Property Name="property_wifi" Type="bit" />
+          <Property Name="property_ac" Type="bit" />
+          <Property Name="property_water_supply" Type="bit" />
+          <Property Name="property_window" Type="bit" />
+          <Property Name="property_video" Type="nvarchar(max)" />
+          <Property Name="property_map" Type="nvarchar(max)" />
+          <Property Name="status" Type="bit" />
+          <Property Name="rts" Type="datetime" />
+        </EntityType>
+        <EntityType Name="Review_Table">
+          <Key>
+            <PropertyRef Name="review_id" />
+          </Key>
+          <Property Name="review_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tenant_id" Type="int" />
+          <Property Name="property_id" Type="int" />
+          <Property Name="review_comment" Type="nvarchar(max)" />
+          <Property Name="review_rating" Type="int" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="StateId" />
+          </Key>
+          <Property Name="StateId" Type="int" Nullable="false" />
+          <Property Name="StateName" Type="varchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tehsile">
+          <Key>
+            <PropertyRef Name="TehsilId" />
+          </Key>
+          <Property Name="TehsilId" Type="int" Nullable="false" />
+          <Property Name="TehsilName" Type="varchar" MaxLength="50" Nullable="false" />
+          <Property Name="DistrictId" Type="smallint" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tenant_Table">
+          <Key>
+            <PropertyRef Name="tenant_id" />
+          </Key>
+          <Property Name="tenant_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="tenant_name" Type="nvarchar(max)" />
+          <Property Name="tenant_mobile" Type="nvarchar(max)" />
+          <Property Name="tenant_email" Type="nvarchar(max)" />
+          <Property Name="status" Type="nvarchar(max)" />
+          <Property Name="rts" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityContainer Name="StudentsRoomsModelStoreContainer">
+          <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Owner_Table" EntityType="Self.Owner_Table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Property_Table" EntityType="Self.Property_Table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Review_Table" EntityType="Self.Review_Table" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tehsile" EntityType="Self.Tehsile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Tenant_Table" EntityType="Self.Tenant_Table" Schema="dbo" store:Type="Tables" />
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="StudentsRoomsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="District">
+          <Key>
+            <PropertyRef Name="DistrictId" />
+          </Key>
+          <Property Name="DistrictId" Type="Int32" Nullable="false" />
+          <Property Name="DistrictName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="StateId" Type="Int16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Owner_Table">
+          <Key>
+            <PropertyRef Name="owner_id" />
+          </Key>
+          <Property Name="owner_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="owner_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="owner_mobile1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="owner_mobile2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="owner_email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="owner_password" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="rts" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Property_Table">
+          <Key>
+            <PropertyRef Name="property_id" />
+          </Key>
+          <Property Name="property_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="owner_id" Type="Int32" />
+          <Property Name="property_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="property_purpose" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="property_type" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="property_price" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="property_rent" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="property_size" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="property_room_no" Type="Int32" />
+          <Property Name="property_bathroom_no" Type="Int32" />
+          <Property Name="property_kitchen_no" Type="Int32" />
+          <Property Name="property_balcony_no" Type="Int32" />
+          <Property Name="property_age" Type="Decimal" Precision="18" Scale="0" />
+          <Property Name="property_image1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="property_image2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="property_image3" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="property_image4" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="property_image5" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="property_address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="property_city" Type="Int32" />
+          <Property Name="property_district" Type="Int32" />
+          <Property Name="property_state" Type="Int32" />
+          <Property Name="property_postal_code" Type="Int32" />
+          <Property Name="property_parking" Type="Boolean" />
+          <Property Name="property_wifi" Type="Boolean" />
+          <Property Name="property_ac" Type="Boolean" />
+          <Property Name="property_water_supply" Type="Boolean" />
+          <Property Name="property_window" Type="Boolean" />
+          <Property Name="property_video" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="property_map" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="Boolean" />
+          <Property Name="rts" Type="DateTime" Precision="3" />
+        </EntityType>
+        <EntityType Name="Review_Table">
+          <Key>
+            <PropertyRef Name="review_id" />
+          </Key>
+          <Property Name="review_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tenant_id" Type="Int32" />
+          <Property Name="property_id" Type="Int32" />
+          <Property Name="review_comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="review_rating" Type="Int32" />
+        </EntityType>
+        <EntityType Name="State">
+          <Key>
+            <PropertyRef Name="StateId" />
+          </Key>
+          <Property Name="StateId" Type="Int32" Nullable="false" />
+          <Property Name="StateName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tehsile">
+          <Key>
+            <PropertyRef Name="TehsilId" />
+          </Key>
+          <Property Name="TehsilId" Type="Int32" Nullable="false" />
+          <Property Name="TehsilName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="DistrictId" Type="Int16" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Tenant_Table">
+          <Key>
+            <PropertyRef Name="tenant_id" />
+          </Key>
+          <Property Name="tenant_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="tenant_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tenant_mobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="tenant_email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="rts" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityContainer Name="StudentsRoomsEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="Districts" EntityType="Self.District" />
+          <EntitySet Name="Owner_Table" EntityType="Self.Owner_Table" />
+          <EntitySet Name="Property_Table" EntityType="Self.Property_Table" />
+          <EntitySet Name="Review_Table" EntityType="Self.Review_Table" />
+          <EntitySet Name="States" EntityType="Self.State" />
+          <EntitySet Name="Tehsiles" EntityType="Self.Tehsile" />
+          <EntitySet Name="Tenant_Table" EntityType="Self.Tenant_Table" />
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="StudentsRoomsModelStoreContainer" CdmEntityContainer="StudentsRoomsEntities">
+          <EntitySetMapping Name="Districts">
+            <EntityTypeMapping TypeName="StudentsRoomsModel.District">
+              <MappingFragment StoreEntitySet="District">
+                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+                <ScalarProperty Name="DistrictName" ColumnName="DistrictName" />
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Owner_Table">
+            <EntityTypeMapping TypeName="StudentsRoomsModel.Owner_Table">
+              <MappingFragment StoreEntitySet="Owner_Table">
+                <ScalarProperty Name="owner_id" ColumnName="owner_id" />
+                <ScalarProperty Name="owner_name" ColumnName="owner_name" />
+                <ScalarProperty Name="owner_mobile1" ColumnName="owner_mobile1" />
+                <ScalarProperty Name="owner_mobile2" ColumnName="owner_mobile2" />
+                <ScalarProperty Name="owner_email" ColumnName="owner_email" />
+                <ScalarProperty Name="owner_password" ColumnName="owner_password" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="rts" ColumnName="rts" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Property_Table">
+            <EntityTypeMapping TypeName="StudentsRoomsModel.Property_Table">
+              <MappingFragment StoreEntitySet="Property_Table">
+                <ScalarProperty Name="property_id" ColumnName="property_id" />
+                <ScalarProperty Name="owner_id" ColumnName="owner_id" />
+                <ScalarProperty Name="property_name" ColumnName="property_name" />
+                <ScalarProperty Name="property_purpose" ColumnName="property_purpose" />
+                <ScalarProperty Name="property_type" ColumnName="property_type" />
+                <ScalarProperty Name="property_price" ColumnName="property_price" />
+                <ScalarProperty Name="property_rent" ColumnName="property_rent" />
+                <ScalarProperty Name="property_size" ColumnName="property_size" />
+                <ScalarProperty Name="property_room_no" ColumnName="property_room_no" />
+                <ScalarProperty Name="property_bathroom_no" ColumnName="property_bathroom_no" />
+                <ScalarProperty Name="property_kitchen_no" ColumnName="property_kitchen_no" />
+                <ScalarProperty Name="property_balcony_no" ColumnName="property_balcony_no" />
+                <ScalarProperty Name="property_age" ColumnName="property_age" />
+                <ScalarProperty Name="property_image1" ColumnName="property_image1" />
+                <ScalarProperty Name="property_image2" ColumnName="property_image2" />
+                <ScalarProperty Name="property_image3" ColumnName="property_image3" />
+                <ScalarProperty Name="property_image4" ColumnName="property_image4" />
+                <ScalarProperty Name="property_image5" ColumnName="property_image5" />
+                <ScalarProperty Name="property_address" ColumnName="property_address" />
+                <ScalarProperty Name="property_city" ColumnName="property_city" />
+                <ScalarProperty Name="property_district" ColumnName="property_district" />
+                <ScalarProperty Name="property_state" ColumnName="property_state" />
+                <ScalarProperty Name="property_postal_code" ColumnName="property_postal_code" />
+                <ScalarProperty Name="property_parking" ColumnName="property_parking" />
+                <ScalarProperty Name="property_wifi" ColumnName="property_wifi" />
+                <ScalarProperty Name="property_ac" ColumnName="property_ac" />
+                <ScalarProperty Name="property_water_supply" ColumnName="property_water_supply" />
+                <ScalarProperty Name="property_window" ColumnName="property_window" />
+                <ScalarProperty Name="property_video" ColumnName="property_video" />
+                <ScalarProperty Name="property_map" ColumnName="property_map" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="rts" ColumnName="rts" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Review_Table">
+            <EntityTypeMapping TypeName="StudentsRoomsModel.Review_Table">
+              <MappingFragment StoreEntitySet="Review_Table">
+                <ScalarProperty Name="review_id" ColumnName="review_id" />
+                <ScalarProperty Name="tenant_id" ColumnName="tenant_id" />
+                <ScalarProperty Name="property_id" ColumnName="property_id" />
+                <ScalarProperty Name="review_comment" ColumnName="review_comment" />
+                <ScalarProperty Name="review_rating" ColumnName="review_rating" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="States">
+            <EntityTypeMapping TypeName="StudentsRoomsModel.State">
+              <MappingFragment StoreEntitySet="State">
+                <ScalarProperty Name="StateId" ColumnName="StateId" />
+                <ScalarProperty Name="StateName" ColumnName="StateName" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tehsiles">
+            <EntityTypeMapping TypeName="StudentsRoomsModel.Tehsile">
+              <MappingFragment StoreEntitySet="Tehsile">
+                <ScalarProperty Name="TehsilId" ColumnName="TehsilId" />
+                <ScalarProperty Name="TehsilName" ColumnName="TehsilName" />
+                <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Tenant_Table">
+            <EntityTypeMapping TypeName="StudentsRoomsModel.Tenant_Table">
+              <MappingFragment StoreEntitySet="Tenant_Table">
+                <ScalarProperty Name="tenant_id" ColumnName="tenant_id" />
+                <ScalarProperty Name="tenant_name" ColumnName="tenant_name" />
+                <ScalarProperty Name="tenant_mobile" ColumnName="tenant_mobile" />
+                <ScalarProperty Name="tenant_email" ColumnName="tenant_email" />
+                <ScalarProperty Name="status" ColumnName="status" />
+                <ScalarProperty Name="rts" ColumnName="rts" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="true" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

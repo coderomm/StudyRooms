@@ -1,0 +1,71 @@
+﻿@model StudentsRooms.Models.Owner_Table
+
+@{
+    ViewBag.Title = "Login";
+}
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger">
+        @ViewBag.ErrorMessage
+    </div>
+}
+
+<style>
+    #top-header-1, #main-header-1, #footer-main-1 {
+        display: none !important;
+    }
+</style>
+
+<!-- Login section start -->
+<div class="login-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="form-section">
+                    <div class="logo-2">
+                        <a class="logo" href="index.html">
+                            <img src="img/logos/logo.png" alt="logo">
+                        </a>
+                    </div>
+                    <h3>Sign Into Your Account</h3>
+                    @using (Html.BeginForm("Login", "User", FormMethod.Post))
+                    {
+                        @*@Html.AntiForgeryToken()*@
+                        @Html.ValidationSummary(true)
+
+                        <div class="form-group clearfix">
+                            <input id="owner_mobile1" name="owner_mobile1" type="number" class="form-control" placeholder="Enter primary mobile number" aria-label="Mobile Number">
+                        </div>
+                        <div class="form-group clearfix">
+                            <input id="owner_password" name="owner_password" type="password" class="form-control" placeholder="Enter Password" aria-label="Password">
+                        </div>
+
+                        <div class="checkbox form-group clearfix">
+                            <div class="form-check float-start">
+                                <input class="form-check-input" type="checkbox" id="rememberme">
+                                <label class="form-check-label" for="rememberme">
+                                    Remember me
+                                </label>
+                            </div>
+                            <a href="forgot-password.html" class="link-light float-end forgot-password">Forgot your password?</a>
+                        </div>
+                        <div class="form-group mb-0 clearfix">
+                            <button type="submit" class="button-md button-theme btn-3 w-100">Login</button>
+                        </div>
+                        <div class="extra-login clearfix">
+                            <span>Or Login With</span>
+                        </div>
+                        <div class="clearfix"></div>
+                        <ul class="social-list">
+                            <li><a href="#" class="facebook-color"><i class="fa fa-facebook facebook-i"></i><span>Facebook</span></a></li>
+                            <li><a href="#" class="twitter-color"><i class="fa fa-twitter twitter-i"></i><span>Twitter</span></a></li>
+                            <li><a href="#" class="google-color"><i class="fa fa-google google-i"></i><span>Google</span></a></li>
+                        </ul>
+                    }
+                    <p>Don't have an account? <a href="signup.html" class="thembo"> Register here</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Login section end -->

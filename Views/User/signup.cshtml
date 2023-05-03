@@ -1,0 +1,86 @@
+﻿
+@model StudentsRooms.Models.Owner_Table
+
+@{
+    ViewBag.Title = "signup";
+}
+<style>
+    #top-header-1, #main-header-1, #footer-main-1 {
+        display: none !important;
+    }
+</style>
+<!-- Login section start -->
+<div class="login-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 col-md-12">
+                <div class="form-section">
+                    <div class="logo-2">
+                        <a class="logo" href="index.html">
+                            <img src="img/logos/logo.png" alt="logo">
+                        </a>
+                    </div>
+                    <h3>Create An Cccount</h3>
+
+                    @using (Html.BeginForm("signup", "User", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+
+                        <div class="form-horizontal">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div class="form-group clearfix">
+                                @Html.EditorFor(model => model.owner_name, new { htmlAttributes = new { @class = "form-control", placeholder = "Your Name" } })
+                                @Html.ValidationMessageFor(model => model.owner_name, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group clearfix">
+                                @Html.EditorFor(model => model.owner_mobile1, new { htmlAttributes = new { @class = "form-control", placeholder = "Mobil Number 1" } })
+                                @Html.ValidationMessageFor(model => model.owner_mobile1, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group clearfix">
+                                @Html.EditorFor(model => model.owner_mobile2, new { htmlAttributes = new { @class = "form-control", placeholder = "Mobile Number 2" } })
+                                @Html.ValidationMessageFor(model => model.owner_mobile2, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group clearfix">
+                                @Html.EditorFor(model => model.owner_email, new { htmlAttributes = new { @class = "form-control", placeholder = "Your Email" } })
+                                @Html.ValidationMessageFor(model => model.owner_email, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group clearfix">
+                                @Html.EditorFor(model => model.owner_password, new { htmlAttributes = new { @class = "form-control", placeholder = "Your Password" } })
+                                @Html.ValidationMessageFor(model => model.owner_password, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div class="form-group clearfix">
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="rememberme">
+                                    <label class="form-check-label" for="rememberme">
+                                        I agree to the terms of service
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group mb-0 clearfix">
+                                <input id="btnsubmit" type="submit" value="Register" class="button-md button-theme btn-3 w-100" />
+                            </div>
+                        </div>
+                    }
+                    <div class="extra-login clearfix">
+                        <span>Or Login With</span>
+                    </div>
+                    <div class="clearfix"></div>
+                    <ul class="social-list">
+                        <li><a href="#" class="facebook-color"><i class="fa fa-facebook facebook-i"></i><span>Facebook</span></a></li>
+                        <li><a href="#" class="twitter-color"><i class="fa fa-twitter twitter-i"></i><span>Twitter</span></a></li>
+                        <li><a href="#" class="google-color"><i class="fa fa-google google-i"></i><span>Google</span></a></li>
+                    </ul>
+                    <p>Already a member? <a href="login.html" class="thembo"> Login here</a></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Login section end -->

@@ -1,0 +1,13 @@
+﻿
+@{
+    ViewBag.Title = "Logout";
+}
+
+<h2>Logout</h2>
+
+public ActionResult Logout()
+{
+    FormsAuthentication.SignOut();
+    return RedirectToAction("Index", "Home");
+}
+

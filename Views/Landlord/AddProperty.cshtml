@@ -1,0 +1,340 @@
+﻿@model StudentsRooms.Models.Property_Table
+
+@{
+    ViewBag.Title = "Add Property";
+}
+<style>
+    .property_rent_div-d-none {
+        display: none;
+    }
+</style>
+
+
+<!-- Submit Property start -->
+
+<div class="content-area-7 submit-property advanced-search">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="submit-address">
+                    @using (Html.BeginForm("AddProperty", "Landlord", FormMethod.Post, new { @enctype = "multipart/form-data" }))
+                    {
+                        <div class="main-title-4">
+                            <h1>Basic Information</h1>
+                        </div>
+                        <div class="search-contents-sidebar mb-30">
+                            <div class="row">
+                                <div class="col-lg-4  col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="property_name" class="form-label">Property Name</label>
+                                        <input type="text" name="property_name" class="form-control" id="property_name" placeholder="Property Name">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Property Purpose</label>
+                                        <select class="selectpicker search-fields" name="property_purpose" id="property_purpose">
+                                            <option value="Sale">For Sale</option>
+                                            <option value="Rent">For Rent</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4  col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Property Type</label>
+                                        <select class="selectpicker search-fields" name="property_type" id="property_type">
+                                            <option value="1">Apartment</option>
+                                            <option value="2">Family House</option>
+                                            <option value="3">PG</option>
+                                            <option value="4">Commercial</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4 col-md-6 col-sm-12 property_price_div" id="property_price_div">
+                                    <div class="form-group">
+                                        <label for="property_price" class="form-label">Property Price</label>
+                                        <input type="text" name="property_price" class="form-control" id="property_price" placeholder="INR">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4  col-md-6 col-sm-12 property_rent_div property_rent_div-d-none" id="property_rent_div">
+                                    <div class="form-group">
+                                        <label for="property_price" class="form-label">Property Rent</label>
+                                        <input type="text" name="property_rent" class="form-control property_rent" id="property_rent" placeholder="INR">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4  col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="property_size" class="form-label">Area / Size</label>
+                                        <input type="text" name="property_size" class="form-control" id="property_size" placeholder="SqFt">
+                                    </div>
+                                </div>
+                                <div class="col-lg-4  col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Bedroom</label>
+                                        <select class="selectpicker search-fields" name="property_room_no" id="property_room_no">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4  col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Bathroom</label>
+                                        <select class="selectpicker search-fields" name="property_bathroom_no" id="property_bathroom_no">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                            <option value="4">4</option>
+                                            <option value="5">5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4  col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Kitchen</label>
+                                        <select class="selectpicker search-fields" name="property_kitchen_no" id="property_kitchen_no">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4  col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label>Balcony</label>
+                                        <select class="selectpicker search-fields" name="property_balcony_no" id="property_balcony_no">
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-4  col-md-6 col-sm-12">
+                                    <div class="form-group">
+                                        <label for="property_age" class="form-label">Property Age</label>
+                                        <input type="text" name="property_age" class="form-control" id="property_age" placeholder="5 Years">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="main-title-4">
+                            <h1>Property Gallery</h1>
+                        </div>
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="row">
+                                        <div class="col-lg-4  col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <div class="dz-default dz-message"><span>Upload video here</span></div>
+                                                <input type="file" accept="video/*" name="property_video" multiple class="dropzone dropzone-design mb-50" />
+                                            </div>
+                                        </div>
+                                        <div class="col-lg-4  col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
+                                                <input type="file" name="property_image1" multiple class="dropzone dropzone-design mb-50" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4  col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
+                                                <input type="file" name="property_image2" class="dropzone dropzone-design mb-50" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4  col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
+                                                <input type="file" name="property_image3" class="dropzone dropzone-design mb-50" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4  col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
+                                                <input type="file" name="property_image4" class="dropzone dropzone-design mb-50" />
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4  col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
+                                                <input type="file" name="property_image5" class="dropzone dropzone-design mb-50" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="main-title-4">
+                            <h1>Location</h1>
+                        </div>
+                        <div class="row mb-30 ">
+
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label>State</label>
+                                    @Html.DropDownListFor(model => model.property_state, ViewBag.stateList as SelectList, "Select State", new { @class = "search-fields form-control py-0" })
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label>District</label>
+                                    @Html.DropDownList("property_district", new SelectList(string.Empty, "Value", "Text"), "Select", new { @class = "search-fields form-control  py-0" })
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label>City</label>
+                                    @Html.DropDownList("property_city", new SelectList(string.Empty, "Value", "Text"), "Select", new { @class = "search-fields form-control  py-0" })
+                                </div>
+                            </div>
+
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="inputcode1" class="form-label">Postal Code</label>
+                                    <input type="text" name="property_postal_code" class="form-control" id="property_postal_code" placeholder="Postal Code">
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-12">
+                                <div class="form-group">
+                                    <label for="property_address" class="form-label">Address</label>
+                                    <input type="text" name="property_address" class="form-control" id="property_address" placeholder="Address">
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-30">
+                            <div class="col-lg-12">
+                                <div class="main-title-4">
+                                    <h1>Features (optional)</h1>
+                                </div>
+                                <div class="row">
+                                    <div class="col-lg-12 col-sm-12 col-xs-12">
+                                        <div class="checkbox checkbox-theme checkbox-circle">
+                                            <input id="checkbox1" type="checkbox" name="property_parking" value="true" />
+                                            <label for="checkbox1">
+                                                Free Parking
+                                            </label>
+                                        </div>
+                                        <div class="checkbox checkbox-theme checkbox-circle">
+                                            <input id="checkbox2" type="checkbox" name="property_ac" value="true" />
+                                            <label for="checkbox2">
+                                                Air Condition
+                                            </label>
+                                        </div>
+                                        <div class="checkbox checkbox-theme checkbox-circle">
+                                            <input id="checkbox3" type="checkbox" name="property_water_supply" value="true" />
+                                            <label for="checkbox3">
+                                                Water Supply
+                                            </label>
+                                        </div>
+                                        <div class="checkbox checkbox-theme checkbox-circle">
+                                            <input id="checkbox4" type="checkbox" name="property_wifi" value="true" />
+                                            <label for="checkbox4">
+                                                WiFi
+                                            </label>
+                                        </div>
+                                        <div class="checkbox checkbox-theme checkbox-circle">
+                                            <input id="checkbox5" type="checkbox" name="property_window" value="true" />
+                                            <label for="checkbox5">
+                                                Window Covering
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="form-group mb-0 clearfix">
+                                    <input id="btnsubmit" type="submit" value="Add Property" class="btn-2 btn-defaults" /><i class="arrow"></i>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Submit Property end -->
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $(function () {
+        $('#property_state').change(function () {
+            //alert($('#property_state').val());
+            $.getJSON('/Landlord/DistrictList/' + $('#property_state').val(), function (data) {
+                var items = '';
+                var dropdown = document.getElementById("property_district");
+                $(dropdown).empty();
+
+                var newOption1 = document.createElement("option");
+                newOption1.innerHTML = "Select District";  //innerHTML & not Text
+                newOption1.value = "0";
+                dropdown.options.add(newOption1);
+
+                $.each(data, function (i, district) {
+                    var newOption = document.createElement("option");
+                    newOption.innerHTML = district.Text;  //innerHTML & not Text
+                    newOption.value = district.Value;
+                    dropdown.options.add(newOption);
+                });
+            });
+        });
+    });
+</script>
+
+<script>
+    $(function () {
+        $('#property_district').change(function () {
+            //alert($('#property_state').val());
+            $.getJSON('/Landlord/TehsilList/' + $('#property_district').val(),
+                function (data) {
+                    var items = '';
+                    var dropdown = document.getElementById("property_city");
+                    $(dropdown).empty();
+
+                    var newOption1 = document.createElement("option");
+                    newOption1.innerHTML = "Select City";  //innerHTML & not Text
+                    newOption1.value = "0";
+                    dropdown.options.add(newOption1);
+
+                    $.each(data, function (i, district) {
+                        var newOption = document.createElement("option");
+                        newOption.innerHTML = district.Text;  //innerHTML & not Text
+                        newOption.value = district.Value;
+                        dropdown.options.add(newOption);
+                    });
+                });
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        $('#property_purpose').on('change', function () {
+            var demovalue = $(this).val();
+            if (demovalue == "Sale") {
+                $("div.property_rent_div").hide();
+                $("div.property_price_div").show();
+            }
+            if (demovalue == "Rent") {
+                $("div.property_rent_div").show();
+                $("div.property_price_div").hide();
+            }
+        });
+    });
+</script>
+
+
+

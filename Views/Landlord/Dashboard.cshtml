@@ -1,0 +1,85 @@
+﻿@model StudentsRooms.Models.Owner_Table
+@{
+    ViewBag.Title = "UserProfile";
+}
+
+<!-- Sub Banner end -->
+<!-- My profile start -->
+<div class="content-area my-profile my-3 my-sm-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <!-- User account box start -->
+                <div class="user-account-box mb-50">
+                    <div class="content">
+                        <ul>
+                            <li>
+                                <a href="~/Landlord/Dashboard/" class="active">
+                                    <i class="flaticon-social"></i>Profile
+                                </a>
+                            </li>
+                            <li>
+                                <a href="~/Landlord/UserProperties/">
+                                    <i class="flaticon-apartment"></i>My Properties
+                                </a>
+                            </li>
+                            <li>
+                                <a href="~/Landlord/AddProperty/">
+                                    <i class="fa fa-plus"></i>Submit New Property
+                                </a>
+                            </li>
+                            <li>
+                                <a href="~/Landlord/changePassword/">
+                                    <i class="flaticon-security"></i>Change Password
+                                </a>
+                            </li>
+                            <li>
+                                <a href="~/User/Logout/">
+                                    <i class="flaticon-sign-out-option"></i>Logout
+                                </a>
+                            </li>
+                            
+                        </ul>
+                    </div>
+                </div>
+                <!-- User account box end -->
+            </div>
+            <div class="col-lg-8 col-md-12 col-sm-12">
+                <!-- My address start-->
+                <div class="my-address">
+                    <div class="main-title-4">
+                        <h1>Your Profile !</h1>
+                    </div>
+                    @using (Html.BeginForm("Dashboard", "Landlord", FormMethod.Post))
+                    {
+                        @Html.AntiForgeryToken()
+                        @Html.HiddenFor(model => model.owner_id)
+                        <div class="form-group">
+                            <label for="inputname1" class="form-label">Your Name</label>
+                            @Html.EditorFor(model => model.owner_name, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.owner_name, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label for="inputphone1" class="form-label">Phone Number 1</label>
+                            @Html.EditorFor(model => model.owner_mobile1, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.owner_mobile1, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label for="inputphone2" class="form-label">Phone Number 2</label>
+                            @Html.EditorFor(model => model.owner_mobile2, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.owner_mobile2, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label for="inputEmail1" class="form-label">Email</label>
+                            @Html.EditorFor(model => model.owner_email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.owner_email, "", new { @class = "text-danger" })
+                        </div>
+                        <button type="submit" class="btn-2 btn-defaults"><span>Save Changes</span> <i class="arrow"></i></button>
+                    }
+                </div>
+                <!-- My address end -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- My profile end -->

@@ -1,0 +1,489 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+
+    <!-- Google Tag Manager -->
+    <script>
+        (function (w, d, s, l, i) {
+            w[l] = w[l] || []; w[l].push({
+                'gtm.start':
+                    new Date().getTime(), event: 'gtm.js'
+            }); var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+                    'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-TNL8QV6');</script>
+    <!-- End Google Tag Manager -->
+    <!-- External CSS libraries -->
+    <link href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/themes/blitzer/jquery-ui.css"
+          rel="Stylesheet" type="text/css" />
+
+    <link rel="stylesheet" type="text/css" href="~/Content/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/animate.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/bootstrap-submenu.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/bootstrap-select.min.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/leaflet.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/map.css">
+    <link rel="stylesheet" type="text/css" href="~/fonts/font-awesome/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="~/fonts/flaticon/font/flaticon.css">
+    <link rel="stylesheet" type="text/css" href="~/fonts/bootstrap-icons/bootstrap-icons.css">
+    <link rel="stylesheet" type="text/css" href="~/fonts/linearicons/style.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/jquery.mCustomScrollbar.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/dropzone.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/magnific-popup.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/slick.css">
+
+    <!-- Custom stylesheet -->
+    <link rel="stylesheet" type="text/css" href="~/Content/css/initial.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/style.css">
+    <link rel="stylesheet" type="text/css" href="~/Content/css/default.css" id="style_sheet">
+
+    <!-- Favicon icon -->
+    <link rel="shortcut icon" href="~/Content/img/favicon.ico" type="image/x-icon">
+
+    <!-- Google fonts -->
+    <link rel="stylesheet" type="text/css" href="../../../../../css?family=Open+Sans:400,300,600,700,800%7CPlayfair+Display:400,700%7CRoboto:100,300,400,400i,500,700">
+    <link href="../../../../../css2?family=Nunito:wght@200;300;400;600;700;900&family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+    <link href="../../../../../css2-1?family=Barlow+Condensed:wght@100;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <link rel="stylesheet" type="text/css" href="~/Content/css/ie10-viewport-bug-workaround.css">
+
+    <!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+    <!--[if lt IE 9]><script type="text/javascript" src="~/Scripts/js/ie8-responsive-file-warning.js"></script><![endif]-->
+    <script src="~/Scripts/js/ie-emulation-modes-warning.js"></script>
+    @*<script src="~/Scripts/jquery-3.4.1.min.js"></script>*@
+
+    @Styles.Render("~/Content/css/default.css")
+
+</head>
+<style>
+    ul#ui-id-1 {
+        height: auto;
+        max-height: 220px;
+        overflow-y: auto;
+        overscroll-behavior: auto;
+    }
+</style>
+<body>
+    <!-- Google Tag Manager (noscript) -->
+    <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TNL8QV6" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    <!-- Option Panel -->
+    <div class="option-panel option-panel-collased">
+        <h2>Change Color</h2>
+        <div class="color-plate default-plate" data-color="default"></div>
+        <div class="color-plate blue-plate" data-color="blue"></div>
+        <div class="color-plate yellow-plate" data-color="yellow"></div>
+        <div class="color-plate red-plate" data-color="red"></div>
+        <div class="color-plate green-light-plate" data-color="green-light"></div>
+        <div class="color-plate orange-plate" data-color="orange"></div>
+        <div class="color-plate yellow-light-plate" data-color="yellow-light"></div>
+        <div class="color-plate green-light-2-plate" data-color="green-light-2"></div>
+        <div class="color-plate olive-plate" data-color="olive"></div>
+        <div class="color-plate purple-plate" data-color="purple"></div>
+        <div class="color-plate blue-light-plate" data-color="blue-light"></div>
+        <div class="color-plate brown-plate" data-color="brown"></div>
+        <div class="setting-button">
+            <i class="fa fa-gear"></i>
+        </div>
+    </div>
+    <!-- /Option Panel -->
+    <!-- Top header start -->
+    <header class="top-header th10 d-none d-lg-block d-md-block" id="top-header-1" style="background-color: #bae8ff;">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 col-md-8 col-sm-7 col-7">
+                    <div class="list-inline">
+                        <a href="tel:8999292525" class="fw-bold" style="color: #262525;"><i class="fa fa-phone"></i>Need Support? +91 8999 292525</a>
+                        <a href="mailto:omsharma9367@gmail.com" class="fw-bold" style="color: #262525;"><i class="fa fa-envelope"></i>omsharma9367@gmail.com</a>
+                    </div>
+                </div>
+                <div class="col-lg-4 col-md-4 col-sm-5 col-5">
+                    @if (Session["UserID"] != null && Session["UserName"] != "")
+                    {
+                        <ul class="top-social-media pull-right" Style="color: #262525;">
+                            <li>
+                                <a href="~/Landlord/Dashboard/" class="fw-bold sign-in" Style="color: #262525;"><i class="fa fa-user" Style="color: #262525;"></i> Hi @Session["UserName"]</a>
+                            </li>
+                            <li>
+                                <i class="fa fa-sign-in" Style="color: #262525;"></i>
+                                @Html.ActionLink(" LogOut", "Logout", "User", new { }, new { @class = "sign-in fw-bold", Style = "color: #262525;" })
+                            </li>
+                        </ul>
+                    }
+                    else
+                    {
+                        <ul class="top-social-media pull-right">
+                            <li>
+                                <i class="fa fa-sign-in" Style="color: #262525;"></i>
+                                @Html.ActionLink("Register", "signup", "User", new { }, new { @class = "sign-in fw-bold", Style = "color: #262525;" })
+                            </li>
+                            <li>
+                                <i class="fa fa-user" Style="color: #262525;"></i>
+                                @Html.ActionLink("LogIn", "Login", "User", new { }, new { @class = "sign-in fw-bold", Style = "color: #262525;" })
+                            </li>
+                        </ul>
+                    }
+                </div>
+            </div>
+        </div>
+    </header>
+    <!-- Top header end -->
+    <!-- Main header start -->
+    <header class="main-header sticky-header header-fixed" id="main-header-1">
+        <div class="container">
+            <nav class="navbar navbar-expand-lg navbar-light">
+                <a href="@Url.Action("Index", "Home")" class="navbar-brand">
+                    <img src="~/Content/images/logo/STUD ROOMS.png" title="logo" alt="logo" class="img-fluid" />
+                </a>
+                <button class="navbar-toggler" id="drawer" type="button">
+                    <span class="fa fa-bars"></span>
+                </button>
+                <div class="navbar-collapse collapse w-100 justify-content-end" id="navbar">
+                    <ul class="navbar-nav ustify-content-start w-100">
+                        <li class="nav-item active">
+                            @Html.ActionLink("Home", "Index", "Home", new { }, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item dropdown">
+                            @Html.ActionLink("Buy", "Index", "BuyProperty", new { }, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item dropdown">
+                            @Html.ActionLink("Rent", "Index", "RentProperty", new { }, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item">
+                            @Html.ActionLink("Faqs", "Index", "Faqs", new { }, new { @class = "nav-link" })
+                        </li>
+                        <li class="nav-item submit-property-button">
+                            @Html.ActionLink("Submit Property", "AddProperty", "Landlord", new { }, new { @class = "button btn-3" })
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+        </div>
+    </header>
+    <!-- Main header end -->
+    <!-- Sidenav start -->
+    <nav id="sidebar" class="nav-sidebar">
+        <!-- Close btn-->
+        <div id="dismiss">
+            <i class="fa fa-close"></i>
+        </div>
+        <div class="sidebar-inner">
+            <div class="sidebar-logo">
+                <a href="index.html">
+                    <img src="~/Content/img/logos/logo.png" alt="sidebarlogo">
+                </a>
+            </div>
+            <div class="sidebar-navigation">
+                <h3 class="heading">Pages</h3>
+                <ul class="menu-list">
+                    <li>
+                        <a href="index.html" class="active pt0">Home</a>
+                    </li>
+                    <li>
+                        <a href="properties-list-rightside.html">Explore Properties</a>
+                    </li>
+                    <li>
+                        <a href="login.html">List Property/Rooms </a>
+                    </li>
+                    <li>
+                        <a href="submit-property.html">Submit Property</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="get-in-touch">
+                <h3 class="heading">Get in Touch</h3>
+                <div class="sidebar-contact-info">
+                    <div class="icon">
+                        <i class="fa fa-phone"></i>
+                    </div>
+                    <div class="body-info">
+                        <a href="tel:0477-0477-8556-552">0477 8556 552</a>
+                    </div>
+                </div>
+                <div class="sidebar-contact-info">
+                    <div class="icon">
+                        <i class="fa fa-envelope"></i>
+                    </div>
+                    <div class="body-info">
+                        <a href="#">info@themevessel.com</a>
+                    </div>
+                </div>
+                <div class="sidebar-contact-info mb-0">
+                    <div class="icon">
+                        <i class="fa fa-fax"></i>
+                    </div>
+                    <div class="body-info">
+                        <a href="tel:0477-0477-8556-552">0266 8556 787</a>
+                    </div>
+                </div>
+            </div>
+            <div class="get-social">
+                <h3 class="heading">Get Social</h3>
+                <a href="#" class="facebook-bg">
+                    <i class="fa fa-facebook"></i>
+                </a>
+                <a href="#" class="twitter-bg">
+                    <i class="fa fa-twitter"></i>
+                </a>
+                <a href="#" class="google-bg">
+                    <i class="fa fa-google"></i>
+                </a>
+                <a href="#" class="linkedin-bg">
+                    <i class="fa fa-linkedin"></i>
+                </a>
+            </div>
+        </div>
+    </nav>
+    <!-- Sidenav end -->
+    @RenderBody()
+    <!-- Footer start -->
+    <footer class="main-footer clearfix" id="footer-main-1">
+        <div class="container">
+            <!-- Footer info-->
+            <div class="footer-info">
+                <div class="row">
+                    <!-- About us -->
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <div class="footer-item fi2">
+                            <div class="main-title-4">
+                                <h1>Contact Us</h1>
+                            </div>
+                            <ul class="personal-info">
+                                <li>
+                                    <i class="fa fa-map-marker"></i>
+                                    Address: 360 Harvest St, North Subract, London. United States Of Amrica.
+                                </li>
+                                <li>
+                                    <i class="fa fa-envelope"></i>
+                                    Email:<a href="mailto:sales@hotelempire.com">info@themevessel.com</a>
+                                </li>
+                                <li>
+                                    <i class="fa fa-phone"></i>
+                                    Phone: <a href="tel:+55-417-634-7071">+0477 85X6 552</a>
+                                </li>
+                                <li>
+                                    <i class="fa fa-fax"></i>
+                                    Fax: +0487 85X6 224
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Links -->
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <div class="footer-item">
+                            <div class="main-title-4">
+                                <h1>Links</h1>
+                            </div>
+                            <ul class="links">
+                                <li>
+                                    <a href="index.html">Home</a>
+                                </li>
+                                <li>
+                                    <a href="faq.html">Faqs</a>
+                                </li>
+                                <li>
+                                    <a href="properties-list-rightside.html">Explore Properties</a>
+                                </li>
+                                <li>
+                                    <a href="login.html">List New Property</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <!-- Recent cars -->
+                    <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                        <div class="footer-item popular-posts">
+                            <div class="main-title-4">
+                                <h1>Popular Posts</h1>
+                            </div>
+                            <div class="d-flex mb-3 popular-posts-box">
+                                <a class="pr-3" href="properties-details.html">
+                                    <img src="~/Content/img/properties/small-properties-2.jpg" alt="small-photo" class="flex-shrink-0 me-3">
+                                </a>
+                                <div class="detail align-self-center">
+                                    <h4>
+                                        <a href="properties-details.html">Modern Family Home</a>
+                                    </h4>
+                                    <div class="listing-post-meta">
+                                        Sep 18, 2021 | <a href="#">$470,00</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex mb-3 popular-posts-box">
+                                <a class="pr-3" href="properties-details.html">
+                                    <img src="~/Content/img/properties/small-properties-1.jpg" alt="small-photo" class="flex-shrink-0 me-3">
+                                </a>
+                                <div class="detail align-self-center">
+                                    <h4>
+                                        <a href="properties-details.html">Sweet Family Home</a>
+                                    </h4>
+                                    <div class="listing-post-meta">
+                                        Aug 18, 2020 | <a href="#">$485,00</a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="d-flex popular-posts-box">
+                                <a class="pr-3" href="properties-details.html">
+                                    <img src="~/Content/img/properties/small-properties-3.jpg" alt="small-photo" class="flex-shrink-0 me-3">
+                                </a>
+                                <div class="detail align-self-center">
+                                    <h4>
+                                        <a href="properties-details.html">Beautful Single Home</a>
+                                    </h4>
+                                    <div class="listing-post-meta">
+                                        Aug Feb, 2021 | <a href="#">$850,00</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="copy-right">
+            <div class="container">
+                <div class="row clearfix">
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                        <p>&copy; @DateTime.Now.Year <a href="http://themevessel.com/" target="_blank">Theme Vessel</a>. All Rights Reserved.</p>
+                    </div>
+                    <div class="col-lg-6 col-md-12 col-sm-12">
+                        <ul class="social-list clearfix">
+                            <li>
+                                <a href="#" class="facebook-bg">
+                                    <i class="fa fa-facebook"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="twitter-bg">
+                                    <i class="fa fa-twitter"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="linkedin-bg">
+                                    <i class="fa fa-linkedin"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="google-bg">
+                                    <i class="fa fa-google-plus"></i>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="#" class="rss-bg">
+                                    <i class="fa fa-rss"></i>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Footer end -->
+
+    <script src="~/Scripts/js/bootstrap.bundle.min.js"></script>
+    <script src="~/Scripts/js/jquery.min.js"></script>
+    <script src="~/Scripts/js/bootstrap-submenu.js"></script>
+    <script src="~/Scripts/js/rangeslider.js"></script>
+    <script src="~/Scripts/js/jquery.mb.YTPlayer.js"></script>
+    <script src="~/Scripts/js/wow.min.js"></script>
+    <script src="~/Scripts/js/bootstrap-select.min.js"></script>
+    <script src="~/Scripts/js/jquery.easing.1.3.js"></script>
+    <script src="~/Scripts/js/jquery.scrollUp.js"></script>
+    <script src="~/Scripts/js/jquery.mCustomScrollbar.concat.min.js"></script>
+    <script src="~/Scripts/js/leaflet.js"></script>
+    <script src="~/Scripts/js/leaflet-providers.js"></script>
+    <script src="~/Scripts/js/leaflet.markercluster.js"></script>
+    <script src="~/Scripts/js/dropzone.js"></script>
+    <script src="~/Scripts/js/jquery.filterizr.js"></script>
+    <script src="~/Scripts/js/jquery.magnific-popup.min.js"></script>
+    <script src="~/Scripts/js/slick.min.js"></script>
+    <script src="~/Scripts/js/maps.js"></script>
+    <script src="~/Scripts/js/sidebar.js"></script>
+    <script src="~/Scripts/js/app.js"></script>
+
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="~/Scripts/js/ie10-viewport-bug-workaround.js"></script>
+    <!-- Custom javascript -->
+    <script src="~/Scripts/js/ie10-viewport-bug-workaround.js"></script>
+
+    <!-- Autocomplete start -->
+    @*<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.10.0.min.js" type="text/javascript"></script>*@
+    <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/jquery-ui.min.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        var districtIdValue;
+        $(function () {
+            $("#DistrictName").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: '/Home/AutoComplete/',
+                        data: "{'prefix': '" + request.term + "' , value:'" + $("#DistrictName").val() + "'}",
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return item;
+                            }))
+                        },
+                        function() {
+                            alert($("#DistrictName").val());
+                        },
+
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                },
+                select: function (e, i) {
+                    $("#DistrictId").val(i.item.val);
+                },
+                minLength: 1
+            });
+        });
+    </script>
+    <!-- Autocomplete end -->
+    @*<script>
+            $(function () {
+                $('#sortProperties').change(function () {
+                    alert($('#sortProperties').val());
+                    $.getJSON('/ExploreProperties/listdata/' + $('#sortProperties').val(),
+                        function (data) {
+                            var items = '';
+                            $.each(data, function (i, district) {
+                                var divtag = "<h1>This is tryial</h1>";
+                                alert(district.StateName);
+                            });
+                        });
+                });
+            });
+        </script>*@
+
+    @*<script>
+        $(document).ready(function () {
+            $('#sortProperties').on('change', function () {
+                var id = $(this).val();
+                alert(id);
+                $.ajax({
+                    url: "/ExploreProperties/listdata/" + $('#sortProperties').val(),
+                    data: "{'id:'" + $("#sortProperties").val() + "'}",
+                    type: "POST",
+                    success: function (response) {
+                    },
+                    error: function () {
+                        alert("Error");
+                    }
+                });
+            });
+        });
+
+    </script>*@
+</body>
+</html>

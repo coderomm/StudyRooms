@@ -1,0 +1,14 @@
+﻿@model StudentsRooms.Models.District
+
+@{
+    ViewBag.Title = "DisplayDistrict";
+}
+
+@if (ViewBag.districtList != null)
+{
+    foreach(var item in ViewBag.districtList)
+                {
+                    <option value="@item.value">@item.Text</option>
+                }
+}
+

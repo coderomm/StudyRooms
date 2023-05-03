@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Index</h2>
+
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+<br />
+@foreach (var student in ViewBag.PropertiesJoinData)
+{
+
+
+    @student.property_name @student.owner_name
+
+
+    @student.status
+}
+
+

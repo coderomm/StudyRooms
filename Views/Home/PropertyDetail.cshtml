@@ -1,0 +1,1027 @@
+﻿@model StudentsRooms.Models.Property_Table
+@{
+    ViewBag.Title = "PropertyDetail2";
+}
+<style>
+    .popup {
+        position: absolute;
+        left: 50%;
+    }
+
+        .popup button {
+            outline: none;
+            cursor: pointer;
+            font-weight: 500;
+            border-radius: 4px;
+            border: 2px solid transparent;
+            transition: background 0.1s linear, border-color 0.1s linear, color 0.1s linear;
+        }
+
+    .popup {
+        background: #fff;
+        padding: 25px;
+        border-radius: 15px;
+        top: -150%;
+        max-width: 380px;
+        width: 100%;
+        opacity: 0;
+        pointer-events: none;
+        box-shadow: 0px 10px 15px rgba(0,0,0,0.1);
+        transform: translate(-50%, -50%) scale(1.2);
+        transition: top 0s 0.2s ease-in-out, opacity 0.2s 0s ease-in-out, transform 0.2s 0s ease-in-out;
+    }
+
+        .popup.show {
+            top: 50%;
+            opacity: 1;
+            pointer-events: auto;
+            transform: translate(-50%, -50%) scale(1);
+            transition: top 0s 0s ease-in-out, opacity 0.2s 0s ease-in-out, transform 0.2s 0s ease-in-out;
+            position: fixed;
+            z-index: 1;
+        }
+
+        .popup :is(header, .icons, .field) {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .popup header {
+            padding-bottom: 15px;
+            border-bottom: 1px solid #ebedf9;
+        }
+
+            .popup header span {
+                font-size: 21px;
+                font-weight: 600;
+            }
+
+            .popup header .close, .icons a {
+                display: flex;
+                align-items: center;
+                border-radius: 50%;
+                justify-content: center;
+                transition: all 0.3s ease-in-out;
+            }
+
+            .popup header .close {
+                color: #878787;
+                font-size: 17px;
+                background: #f2f3fb;
+                height: 33px;
+                width: 33px;
+                cursor: pointer;
+            }
+
+                .popup header .close:hover {
+                    background: #ebedf9;
+                }
+
+        .popup .content {
+            margin: 20px 0;
+        }
+
+        .popup .icons {
+            margin: 15px 0 20px 0;
+        }
+
+    .content p {
+        font-size: 16px;
+    }
+
+    .content .icons a {
+        height: 50px;
+        width: 50px;
+        font-size: 20px;
+        text-decoration: none;
+        border: 1px solid transparent;
+    }
+
+    .popup .icons a i {
+        transition: transform 0.3s ease-in-out;
+    }
+
+    .popup .content .field {
+        margin: 12px 0 -5px 0;
+        height: 45px;
+        border-radius: 4px;
+        padding: 0 5px;
+        border: 1px solid #e1e1e1;
+    }
+
+    .popup .field.active {
+        border-color: #95c41f;
+    }
+
+    .popup .field i {
+        width: 50px;
+        font-size: 18px;
+        text-align: center;
+    }
+
+    .popup .field.active i {
+        color: #95c41f;
+    }
+
+    .popup .field input {
+        width: 100%;
+        height: 100%;
+        border: none;
+        outline: none;
+        font-size: 15px;
+        cursor: pointer;
+    }
+
+    .popup .field button {
+        color: #fff;
+        padding: 5px 18px;
+        background: #95c41f;
+    }
+
+        .popup .field button:hover {
+            background: #8d39fa;
+        }
+</style>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+<link rel="stylesheet" href="https://unicons.iconscout.com/release/v3.0.6/css/line.css">
+
+<!-- Properties details page start -->
+<div class="content-area  properties-details-page">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-12 col-sm-12">
+                <!-- Properties desciption start -->
+                <div class="product-slider-box cds-2 clearfix mb-2">
+                    <div class="product-img-slide">
+                        <div class="slider-for2">
+                            <img src="@Url.Content("~/Content/images/propertyImages/" + Model.property_image1)" alt="slider-photo" class="img-fluid w-100">
+                            <img src="@Url.Content("~/Content/images/propertyImages/" + Model.property_image2)" alt="slider-photo" class="img-fluid w-100">
+                            <img src="@Url.Content("~/Content/images/propertyImages/" + Model.property_image3)" alt="slider-photo" class="img-fluid w-100">
+                            <img src="@Url.Content("~/Content/images/propertyImages/" + Model.property_image4)" alt="slider-photo" class="img-fluid w-100">
+                            <img src="@Url.Content("~/Content/images/propertyImages/" + Model.property_image5)" alt="slider-photo" class="img-fluid w-100">
+                        </div>
+                        <div class="slider-nav2">
+                            <div class="thumb-slide"><img src="@Url.Content("~/Content/images/propertyImages/" + Model.property_image1)" alt="small-photo"></div>
+                            <div class="thumb-slide"><img src="@Url.Content("~/Content/images/propertyImages/" + Model.property_image2)" alt="small-photo"></div>
+                            <div class="thumb-slide"><img src="@Url.Content("~/Content/images/propertyImages/" + Model.property_image3)" alt="small-photo"></div>
+                            <div class="thumb-slide"><img src="@Url.Content("~/Content/images/propertyImages/" + Model.property_image4)" alt="small-photo"></div>
+                            <div class="thumb-slide"><img src="@Url.Content("~/Content/images/propertyImages/" + Model.property_image5)" alt="small-photo"></div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Properties desciption end -->
+                <!-- Header Properties start -->
+
+
+                <div class="heading-properties clearfix sidebar-widget sw2">
+                    <div class="pull-left">
+                        <h3>@Model.property_name</h3>
+                        <p>
+                            <i class="fa fa-map-marker"></i>@Model.property_address,
+                        </p>
+                        <br />
+                        <button class="view-modal button-md button-theme btn-3">View Contact Details</button>
+                        <div class="popup">
+                            <header>
+                                <span>Owner Contact Details</span>
+                                <div class="close"><i class="uil uil-times"></i></div>
+                            </header>
+                            <div class="content">
+                                <p>POSTED BY OWNER:</p>
+                                <div class="field">
+                                    <i class="fa fa-user"></i>
+                                    <a href="#">
+                                        <input type="text" readonly value="@ViewBag.ownername">
+                                    </a>
+
+                                </div>
+                                <div class="field">
+                                    <i class="fa fa-phone"></i>
+                                    <a href="tel:+91+@ViewBag.ownermob1">
+                                        <input type="text" readonly value="@ViewBag.ownermob1">
+                                    </a>
+                                    <button>Copy</button>
+                                </div>
+                                <div class="field">
+                                    <i class="fa fa-phone"></i>
+                                    <a href="tel:+91+@ViewBag.ownermob2">
+                                        <input type="text" readonly value="@ViewBag.ownermob2">
+                                    </a>
+                                    <button>Copy</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="pull-right">
+                        <h3><span>Rs @Model.property_price</span></h3>
+                        <h5>
+                            Per Manth
+                        </h5>
+                    </div>
+                </div>
+
+                <!-- Header Properties end -->
+                <!-- Properties details section start -->
+                <div class="Properties-details-section sidebar-widget sw2">
+                    <!-- Advanced search start -->
+                    <div class="advanced-search d-lg-none">
+                        <div class="main-title-4">
+                            <h1>Advanced  Search</h1>
+                        </div>
+                        <form method="GET">
+                            <div class="form-group">
+                                <select class="selectpicker search-fields" name="property status">
+                                    <option>Property Status</option>
+                                    <option>For Sale</option>
+                                    <option>For Rent</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="selectpicker search-fields" name="location">
+                                    <option>Location</option>
+                                    <option>United States</option>
+                                    <option>United Kingdom</option>
+                                    <option>American Samoa</option>
+                                    <option>Belgium</option>
+                                    <option>Cameroon</option>
+                                    <option>Canada</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="selectpicker search-fields" name="property types">
+                                    <option>Property Types</option>
+                                    <option>Residential</option>
+                                    <option>Commercial</option>
+                                    <option>Land</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="selectpicker search-fields" name="area from">
+                                    <option>Area From</option>
+                                    <option>1000</option>
+                                    <option>800</option>
+                                    <option>600</option>
+                                    <option>400</option>
+                                    <option>200</option>
+                                    <option>100</option>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <select class="selectpicker search-fields" name="bedrooms">
+                                            <option>Bedrooms</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <select class="selectpicker search-fields" name="bathrooms">
+                                            <option>Bathrooms</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <select class="selectpicker search-fields" name="balcony">
+                                            <option>Balcony</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <select class="selectpicker search-fields" name="garage">
+                                            <option>Garage</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="range-slider">
+                                <label>Area</label>
+                                <div data-min="0" data-max="10000" data-unit="Sq ft" data-min-name="min_area" data-max-name="max_area" class="range-slider-ui ui-slider" aria-disabled="false"></div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="range-slider">
+                                <label>Price</label>
+                                <div data-min="0" data-max="150000" data-unit="USD" data-min-name="min_price" data-max-name="max_price" class="range-slider-ui ui-slider" aria-disabled="false"></div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="form-group mb-30">
+                                <button type="submit" class="button-md button-theme btn-3 w-100">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Advanced search end -->
+                    <!-- Property description start -->
+                    <div class="property-description tabbing tabbing-box tb2">
+                        <ul class="nav nav-tabs" id="myTab" role="tablist">
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true">Description</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button" role="tab" aria-controls="profile" aria-selected="false">Condition</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button" role="tab" aria-controls="contact" aria-selected="false">Amenities</button>
+                            </li>
+
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="profile-tab4" data-bs-toggle="tab" data-bs-target="#profile4" type="button" role="tab" aria-controls="profile4" aria-selected="false">Floor Plans</button>
+                            </li>
+                            <li class="nav-item" role="presentation">
+                                <button class="nav-link" id="contact-tab5" data-bs-toggle="tab" data-bs-target="#contact5" type="button" role="tab" aria-controls="contact5" aria-selected="false">Video</button>
+                            </li>
+                        </ul>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+                                <div class="accordion accordion-flush" id="accordionFlushExample7">
+                                    <div class="accordion-item">
+                                        <div class="properties-description floor-plans">
+                                            <div class="main-title-4">
+                                                <h1><span>Description</span></h1>
+                                            </div>
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><strong>Property Type</strong></td>
+                                                        <td><strong>City</strong></td>
+                                                        <td><strong>District</strong></td>
+                                                        <td><strong>State</strong></td>
+                                                        <td><strong>Code</strong></td>
+                                                        <td><strong>How Old</strong></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            @(Model.property_type == 1.ToString() ? "Apartment" : "")
+                                                            @(Model.property_type == 2.ToString() ? "Family House" : "")
+                                                            @(Model.property_type == 3.ToString() ? "PG" : "")
+                                                            @(Model.property_type == 4.ToString() ? "Commercial" : "")
+                                                        </td>
+                                                        <td>@ViewBag.cityname</td>
+                                                        <td>@ViewBag.districtname</td>
+                                                        <td>@ViewBag.statename</td>
+                                                        <td>@Model.property_postal_code</td>
+                                                        <td>@Model.property_age years</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+                                <div class="accordion accordion-flush" id="accordionFlushExample2">
+                                    <div class="accordion-item">
+                                        <div class="properties-condition">
+                                            <div class="main-title-4">
+                                                <h1><span>Condition</span></h1>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <ul class="condition">
+                                                        <li>
+                                                            <i class="fa fa-check-square"></i>@Model.property_room_no Bed
+                                                        </li>
+                                                        <li>
+                                                            <i class="fa fa-check-square"></i>@Model.property_bathroom_no Baath
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-md-6 col-sm-6 col-xs-12">
+                                                    <ul class="condition">
+                                                        <li>
+                                                            <i class="fa fa-check-square"></i>@Model.property_size sq ft
+                                                        </li>
+                                                        <li>
+                                                            <i class="fa fa-check-square"></i>@Model.property_balcony_no Balcony
+                                                        </li>
+                                                    </ul>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+
+
+
+
+                            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+                                <div class="accordion accordion-flush" id="accordionFlushExample3">
+                                    <div class="accordion-item">
+                                        <div class="properties-amenities">
+                                            <div class="main-title-4">
+                                                <h1><span>Amenities</span></h1>
+                                            </div>
+                                            <div class="row">
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                    <ul class="amenities">
+                                                        @{
+                                                            if (Model.property_ac == true)
+                                                            {
+                                                                <li><i class='fa fa-check-square'></i> Air Condition</li>
+                                                            }
+                                                            else
+                                                            {
+                                                            }
+                                                        }
+                                                        <li>
+                                                            <i class='fa fa-check-square'></i>@Model.property_balcony_no Balcony
+                                                        </li>
+                                                    </ul>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                    <ul class="amenities">
+                                                        @{
+                                                            if (Model.property_wifi == true)
+                                                            {
+                                                                <li><i class='fa fa-check-square'></i> Wifi</li>
+                                                            }
+                                                            else
+                                                            {
+                                                            }
+                                                        }
+                                                        @{
+                                                            if (Model.property_parking == true)
+                                                            {
+                                                                <li><i class='fa fa-check-square'></i> Parking</li>
+                                                            }
+                                                            else
+                                                            {
+                                                            }
+                                                        }
+                                                    </ul>
+                                                </div>
+                                                <div class="col-lg-4 col-md-4 col-sm-4 col-xs-12">
+                                                    <ul class="amenities">
+                                                        @{
+                                                            if (Model.property_window == true)
+                                                            {
+                                                                <li><i class='fa fa-check-square'></i> Windows</li>
+                                                            }
+                                                            else
+                                                            {
+                                                            }
+                                                        }
+                                                        @{
+                                                            if (Model.property_water_supply == true)
+                                                            {
+                                                                <li><i class='fa fa-check-square'></i> Water Supply</li>
+                                                            }
+                                                            else
+                                                            {
+                                                            }
+                                                        }
+                                                    </ul>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="profile4" role="tabpanel" aria-labelledby="profile-tab4">
+                                <div class="accordion accordion-flush" id="accordionFlushExample5">
+                                    <div class="accordion-item">
+                                        <div class="floor-plans">
+                                            <div class="main-title-4">
+                                                <h1><span>Floor</span> Plans</h1>
+                                            </div>
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><strong>Size (sq ft)</strong></td>
+                                                        <td><strong>Rooms</strong></td>
+                                                        <td><strong>Kitchen</strong></td>
+                                                        <td><strong>Balcony</strong></td>
+                                                        <td><strong>Bathrooms</strong></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>@Model.property_size</td>
+                                                        <td>@Model.property_room_no</td>
+                                                        <td>@Model.property_kitchen_no</td>
+                                                        <td>@Model.property_balcony_no</td>
+                                                        <td>@Model.property_bathroom_no</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane fade" id="contact5" role="tabpanel" aria-labelledby="contact-tab5">
+                                <div class="accordion accordion-flush" id="accordionFlushExample4">
+                                    <div class="accordion-item">
+                                        <div class="inside-properties">
+                                            <!-- Main Title 2 -->
+                                            <div class="main-title-4">
+                                                <h1><span>Video</span></h1>
+                                            </div>
+                                            <video class="modalIframe" width="320" height="240" controls allowfullscreen="">
+                                                <source src="@Url.Content("~/Content/VideoFileUpload/" + Model.property_video)" type="video/mp4">
+                                            </video>
+                                            @*<iframe class="modalIframe" src="https://www.youtube.com/embed/V7IrnC9MISU" allowfullscreen=""></iframe>*@
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Property description end -->
+                </div>
+                <!-- Properties details section end -->
+                <!-- Location start -->
+                <div class="location sidebar-widget sw2">
+                    <div class="map">
+                        <!-- Main Title 2 -->
+                        <div class="main-title-4">
+                            <h1><span>Location</span></h1>
+                        </div>
+                        <div id="map" class="contact-map"></div>
+                    </div>
+                </div>
+                <!-- Location end -->
+                <!-- Comments section start -->
+                <div class="comments-section sidebar-widget">
+                    <!-- Main Title 2 -->
+                    <div class="main-title-4">
+                        <h1><span>Comments </span> Section</h1>
+                    </div>
+
+                    <ul class="comments">
+                        <li>
+                            <div class="comment">
+                                <div class="comment-author">
+                                    <a href="#">
+                                        <img src="img/avatar/avatar-5.png" alt="avatar-5">
+                                    </a>
+                                </div>
+                                <div class="comment-content">
+                                    <div class="comment-meta">
+                                        <div class="comment-meta-author">
+                                            John Antony
+                                        </div>
+                                        <div class="comment-meta-reply float-end">
+                                            <a href="#">Reply</a>
+                                        </div>
+                                        <div class="comment-meta-date float-end">
+                                            8:55 PM 7/4/2021
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="comment-body">
+                                        <div class="comment-rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-o"></i>
+                                            <span>( 4 Reviews )</span>
+                                        </div>
+                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus tincidunt aliquam. Aliquam gravida massa at sem vulputate.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="comment">
+                                <div class="comment-author">
+                                    <a href="#">
+                                        <img src="img/avatar/avatar-5.png" alt="avatar-5">
+                                    </a>
+                                </div>
+                                <div class="comment-content">
+                                    <div class="comment-meta">
+                                        <div class="comment-meta-author">
+                                            Eliane Pereira
+                                        </div>
+                                        <div class="comment-meta-reply float-end">
+                                            <a href="#">Reply</a>
+                                        </div>
+                                        <div class="comment-meta-date float-end">
+                                            8:45 PM 7/3/2020
+                                        </div>
+                                    </div>
+                                    <div class="clearfix"></div>
+                                    <div class="comment-body">
+                                        <div class="comment-rating">
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star"></i>
+                                            <i class="fa fa-star-o"></i>
+                                            <span>( 4 Reviews )</span>
+                                        </div>
+                                        <p>
+                                            Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever.
+                                        </p>
+                                    </div>
+                                </div>
+                            </div>
+                            <ul>
+                                <li>
+                                    <div class="comment comment-mrg-bdr-nane mb-0">
+                                        <div class="comment-author">
+                                            <a href="#">
+                                                <img src="img/avatar/avatar-5.png" alt="avatar-5">
+                                            </a>
+                                        </div>
+                                        <div class="comment-content cc2">
+                                            <div class="comment-meta">
+                                                <div class="comment-meta-author">
+                                                    Jane Doe
+                                                </div>
+                                                <div class="comment-meta-reply float-end">
+                                                    <a href="#">Reply</a>
+                                                </div>
+                                                <div class="comment-meta-date float-end">
+                                                    8:42 PM 3/3/2021
+                                                </div>
+                                            </div>
+                                            <div class="clearfix"></div>
+                                            <div class="comment-body">
+                                                <div class="comment-rating">
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star"></i>
+                                                    <i class="fa fa-star-o"></i>
+                                                    <span>( 4 Reviews )</span>
+                                                </div>
+                                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec luctus tincidunt aliquam. Aliquam gravida massa at sem vulputate interdum et vel eros.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </li>
+                    </ul>
+                </div>
+                <!-- Comments section end -->
+                <!-- Contact 1 start -->
+                <div class="contact-1 sidebar-widget mb-30">
+                    <div class="main-title-4">
+                        <h1>Leave a Comment</h1>
+                    </div>
+                    <div class="contact-form">
+                        <form id="contact_form" action="index.html" method="GET" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="form-group name">
+                                        <input type="text" name="name" class="form-control" placeholder="Name" aria-label="Full Name">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group email">
+                                        <input type="email" name="email" class="form-control" placeholder="Email Address" aria-label="Email Address">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group subject">
+                                        <input type="text" name="subject" class="form-control" placeholder="Subject" aria-label="Subject">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="form-group number">
+                                        <input type="text" name="phone" class="form-control" placeholder="Phone" aria-label="Phone Number">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="form-group message">
+                                        <textarea class="form-control" name="message" placeholder="Write message" aria-label="Write message"></textarea>
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <div class="send-btn">
+                                        <button type="submit" class="button-md button-theme btn-3">Send Message</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <!-- Contact 1 end -->
+            </div>
+            <div class="col-lg-4 col-md-12 col-sm-12">
+                <!-- Sidebar start -->
+                <div class="sidebar right">
+                    <!-- Advanced search start -->
+                    <div class="sidebar-widget advanced-search as2">
+                        <div class="main-title-4">
+                            <h1>Advanced  Search</h1>
+                        </div>
+                        <form method="GET">
+                            <div class="form-group">
+                                <select class="selectpicker search-fields" name="property status">
+                                    <option>Property Status</option>
+                                    <option>For Sale</option>
+                                    <option>For Rent</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="selectpicker search-fields" name="location">
+                                    <option>Location</option>
+                                    <option>United States</option>
+                                    <option>United Kingdom</option>
+                                    <option>American Samoa</option>
+                                    <option>Belgium</option>
+                                    <option>Cameroon</option>
+                                    <option>Canada</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="selectpicker search-fields" name="property types">
+                                    <option>Property Types</option>
+                                    <option>Residential</option>
+                                    <option>Commercial</option>
+                                    <option>Land</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="selectpicker search-fields" name="area from">
+                                    <option>Area From</option>
+                                    <option>1000</option>
+                                    <option>800</option>
+                                    <option>600</option>
+                                    <option>400</option>
+                                    <option>200</option>
+                                    <option>100</option>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <select class="selectpicker search-fields" name="bedrooms">
+                                            <option>Bedrooms</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <select class="selectpicker search-fields" name="bathrooms">
+                                            <option>Bathrooms</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <select class="selectpicker search-fields" name="balcony">
+                                            <option>Balcony</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <select class="selectpicker search-fields" name="garage">
+                                            <option>Garage</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="range-slider">
+                                <label>Area</label>
+                                <div data-min="0" data-max="10000" data-unit="Sq ft" data-min-name="min_area" data-max-name="max_area" class="range-slider-ui ui-slider" aria-disabled="false"></div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="range-slider">
+                                <label>Price</label>
+                                <div data-min="0" data-max="150000" data-unit="USD" data-min-name="min_price" data-max-name="max_price" class="range-slider-ui ui-slider" aria-disabled="false"></div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="form-group mb-0">
+                                <button type="submit" class="button-md button-theme btn-3 w-100">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Advanced search end -->
+                    <!-- Popular posts start -->
+                    <div class="sidebar-widget popular-posts">
+                        <div class="main-title-4">
+                            <h1>Recent Properties</h1>
+                        </div>
+                        <div class="d-flex mb-3 popular-posts-box">
+                            <a class="pr-3" href="properties-details.html">
+                                <img src="img/properties/small-properties-2.jpg" alt="small-photo" class="flex-shrink-0 me-3">
+                            </a>
+                            <div class="detail align-self-center">
+                                <h4>
+                                    <a href="properties-details.html">Modern Family Home</a>
+                                </h4>
+                                <div class="listing-post-meta">
+                                    Sep 18, 2021 | <a href="#">$470,00</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex mb-3 popular-posts-box">
+                            <a class="pr-3" href="properties-details.html">
+                                <img src="img/properties/small-properties-1.jpg" alt="small-photo" class="flex-shrink-0 me-3">
+                            </a>
+                            <div class="detail align-self-center">
+                                <h4>
+                                    <a href="properties-details.html">Sweet Family Home</a>
+                                </h4>
+                                <div class="listing-post-meta">
+                                    Aug 18, 2020 | <a href="#">$485,00</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="d-flex popular-posts-box">
+                            <a class="pr-3" href="properties-details.html">
+                                <img src="img/properties/small-properties-3.jpg" alt="small-photo" class="flex-shrink-0 me-3">
+                            </a>
+                            <div class="detail align-self-center">
+                                <h4>
+                                    <a href="properties-details.html">Beautful Single Home</a>
+                                </h4>
+                                <div class="listing-post-meta">
+                                    Aug Feb, 2021 | <a href="#">$850,00</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Popular posts end -->
+                    <!-- Category posts start -->
+                    <div class="sidebar-widget category-posts">
+                        <div class="main-title-4">
+                            <h1>Popular Category</h1>
+                        </div>
+                        <ul class="list-unstyled list-cat">
+                            <li><a href="#">Single Family </a> <span>(45)  </span></li>
+                            <li><a href="#">Apartment  </a> <span>(21)  </span></li>
+                            <li><a href="#">Condo </a> <span>(23)  </span></li>
+                            <li><a href="#">Multi Family </a> <span>(19)  </span></li>
+                            <li><a href="#">Villa </a> <span>(19)  </span></li>
+                            <li><a href="#">Other  </a> <span>(22)  </span></li>
+                        </ul>
+                    </div>
+                    <!-- Category posts end -->
+                    <!-- Social media start -->
+                    <div class="social-media-area sidebar-widget clearfix">
+                        <!-- Main Title 2 -->
+                        <div class="main-title-4">
+                            <h1><span>Social</span> Media</h1>
+                        </div>
+                        <!-- Social list -->
+                        <div class="social-media clearfix">
+                            <div class="social-list">
+                                <div class="icon facebook">
+                                    <div class="tooltip">Facebook</div>
+                                    <span><i class="fa fa-facebook"></i></span>
+                                </div>
+                                <div class="icon twitter">
+                                    <div class="tooltip">Twitter</div>
+                                    <span><i class="fa fa-twitter"></i></span>
+                                </div>
+                                <div class="icon instagram">
+                                    <div class="tooltip">Instagram</div>
+                                    <span><i class="fa fa-instagram"></i></span>
+                                </div>
+                                <div class="icon github">
+                                    <div class="tooltip">Github</div>
+                                    <span><i class="fa fa-github"></i></span>
+                                </div>
+                                <div class="icon youtube mr-0">
+                                    <div class="tooltip">Youtube</div>
+                                    <span><i class="fa fa-youtube"></i></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Social media end -->
+                    <!-- Mortgage calculator start -->
+                    <div class="sidebar-widget contact-1 mortgage-calculator">
+                        <div class="main-title-4">
+                            <h1><span>Mortgage</span> Calculator</h1>
+                        </div>
+                        <div class="contact-form">
+                            <form action="index.html" method="GET">
+                                <div class="form-group">
+                                    <label for="inputprice1" class="form-label">Property Price</label>
+                                    <input type="text" name="property-price" class="form-control" id="inputprice1" placeholder="$820.000">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputinterest1" class="form-label">Interest Rate (%)</label>
+                                    <input type="text" name="interest" class="form-control" id="inputinterest1" placeholder="15%">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputmonths1" class="form-label">Period In Months</label>
+                                    <input type="text" name="months" class="form-control" id="inputmonths1" placeholder="Period In Months">
+                                </div>
+                                <div class="form-group">
+                                    <label for="inputpayment1" class="form-label">Down Payment</label>
+                                    <input type="text" name="payment" class="form-control" id="inputpayment1" placeholder="$36,300">
+                                </div>
+                                <div class="form-group mb-0">
+                                    <button type="submit" class="button-md button-theme btn-3 w-100">Search</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                    <!-- Mortgage calculator end -->
+                </div>
+                <!-- Sidebar end -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Properties details page end -->
+<!-- Intro section start -->
+<div class="intro-section">
+    <div class="intro-section-inner">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-9 col-md-7 col-sm-12">
+                    <h3>Looking To Sell Or Rent Your Property?</h3>
+                </div>
+                <div class="col-lg-3 col-md-5 col-sm-12">
+                    <a class="btn-2 btn-white" href="contact.html">
+                        <span>Get in Touch</span> <i class="arrow"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Intro section end -->
+<script type="text/javascript">
+    const viewBtn = document.querySelector(".view-modal"),
+        popup = document.querySelector(".popup"),
+        close = popup.querySelector(".close"),
+        field = popup.querySelector(".field"),
+        input = field.querySelector("input"),
+        copy = field.querySelector("button");
+
+    viewBtn.onclick = () => {
+        popup.classList.toggle("show");
+    }
+    close.onclick = () => {
+        viewBtn.click();
+    }
+
+    copy.onclick = () => {
+        input.select(); //select input value
+        if (document.execCommand("copy")) { //if the selected text copy
+            field.classList.add("active");
+            copy.innerText = "Copied";
+            setTimeout(() => {
+                window.getSelection().removeAllRanges(); //remove selection from document
+                field.classList.remove("active");
+                copy.innerText = "Copy";
+            }, 3000);
+        }
+    }
+</script>
