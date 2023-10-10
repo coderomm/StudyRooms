@@ -7,7 +7,7 @@ using System.Web.Mvc;
 
 namespace StudentsRooms.Controllers
 {
-    public class ExplorePropertiesController : Controller
+    public class ExplorePropertiesController : BaseController
     {
         StudentsRoomsEntities db = new StudentsRoomsEntities();
 
@@ -193,77 +193,8 @@ namespace StudentsRooms.Controllers
                 ViewBag.PropertiesJoinData = PropertiesData;
                 return View();
             }
+
         }
 
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
-        // GET: ExploreProperties/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: ExploreProperties/Create
-        [HttpPost]
-        public ActionResult Create(FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ExploreProperties/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: ExploreProperties/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: ExploreProperties/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: ExploreProperties/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
     }
 }

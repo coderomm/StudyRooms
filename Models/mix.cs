@@ -23,8 +23,6 @@ namespace StudentsRooms.Models
         public string owner_email { get; set; }
         public string owner_password { get; set; }
         public string status { get; set; }
-        public string rts { get; set; }
-
 
         public int property_id { get; set; }
         public string property_name { get; set; }
@@ -55,6 +53,7 @@ namespace StudentsRooms.Models
         public Nullable<bool> property_window { get; set; }
         public string property_video { get; set; }
         public string property_map { get; set; }
+        public Nullable<System.DateTime> rts { get; set; }
     }
 
 }

@@ -1,9 +1,7 @@
 ﻿@model StudentsRooms.Models.Property_Table
-
 @{
-    ViewBag.Title = "Property Detail";
+    ViewBag.Title = "PropertyDetail2";
 }
-
 <style>
     @@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap');
 
@@ -222,45 +220,11 @@
         }
 </style>
 
-<div class="mpopup">
-    <div class="popup">
-        <header>
-            <span>Owner Contact Details</span>
-            <div class="close"><i class="uil uil-times"></i></div>
-        </header>
-        <div class="content">
-            <p>POSTED BY OWNER:</p>
-            <div class="field">
-                <i class="fa fa-user"></i>
-                <a href="#">
-                    <input type="text" readonly value="@ViewBag.ownername">
-                </a>
-
-            </div>
-            <div class="field">
-                <i class="fa fa-phone"></i>
-                <a href="tel:+91+@ViewBag.ownermob1">
-                    <input type="text" readonly value="@ViewBag.ownermob1">
-                </a>
-                <button>Copy</button>
-            </div>
-            <div class="field">
-                <i class="fa fa-phone"></i>
-                <a href="tel:+91+@ViewBag.ownermob2">
-                    <input type="text" readonly value="@ViewBag.ownermob2">
-                </a>
-                <button>Copy</button>
-            </div>
-        </div>
-    </div>
-</div>
-
 <!-- Properties details page start -->
 <div class="content-area  properties-details-page">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-md-12 col-sm-12">
-
                 <!-- Properties desciption start -->
                 <div class="product-slider-box cds-2 clearfix mb-2">
                     <div class="product-img-slide">
@@ -282,6 +246,8 @@
                 </div>
                 <!-- Properties desciption end -->
                 <!-- Header Properties start -->
+
+
                 <div class="heading-properties clearfix sidebar-widget sw2">
                     <div class="pull-left">
                         <h3>@Model.property_name</h3>
@@ -308,9 +274,125 @@
 
                     </div>
                 </div>
+
                 <!-- Header Properties end -->
                 <!-- Properties details section start -->
                 <div class="Properties-details-section sidebar-widget sw2">
+                    <!-- Advanced search start -->
+                    <div class="advanced-search d-lg-none">
+                        <div class="main-title-4">
+                            <h1>Advanced  Search</h1>
+                        </div>
+                        <form method="GET">
+                            <div class="form-group">
+                                <select class="selectpicker search-fields" name="property status">
+                                    <option>Property Status</option>
+                                    <option>For Sale</option>
+                                    <option>For Rent</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="selectpicker search-fields" name="location">
+                                    <option>Location</option>
+                                    <option>United States</option>
+                                    <option>United Kingdom</option>
+                                    <option>American Samoa</option>
+                                    <option>Belgium</option>
+                                    <option>Cameroon</option>
+                                    <option>Canada</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="selectpicker search-fields" name="property types">
+                                    <option>Property Types</option>
+                                    <option>Residential</option>
+                                    <option>Commercial</option>
+                                    <option>Land</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <select class="selectpicker search-fields" name="area from">
+                                    <option>Area From</option>
+                                    <option>1000</option>
+                                    <option>800</option>
+                                    <option>600</option>
+                                    <option>400</option>
+                                    <option>200</option>
+                                    <option>100</option>
+                                </select>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <select class="selectpicker search-fields" name="bedrooms">
+                                            <option>Bedrooms</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <select class="selectpicker search-fields" name="bathrooms">
+                                            <option>Bathrooms</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                            <option>6</option>
+                                            <option>7</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <select class="selectpicker search-fields" name="balcony">
+                                            <option>Balcony</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-6 col-md-6 col-sm-6">
+                                    <div class="form-group">
+                                        <select class="selectpicker search-fields" name="garage">
+                                            <option>Garage</option>
+                                            <option>1</option>
+                                            <option>2</option>
+                                            <option>3</option>
+                                            <option>4</option>
+                                            <option>5</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="range-slider">
+                                <label>Area</label>
+                                <div data-min="0" data-max="10000" data-unit="Sq ft" data-min-name="min_area" data-max-name="max_area" class="range-slider-ui ui-slider" aria-disabled="false"></div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="range-slider">
+                                <label>Price</label>
+                                <div data-min="0" data-max="150000" data-unit="USD" data-min-name="min_price" data-max-name="max_price" class="range-slider-ui ui-slider" aria-disabled="false"></div>
+                                <div class="clearfix"></div>
+                            </div>
+                            <div class="form-group mb-30">
+                                <button type="submit" class="button-md button-theme btn-3 w-100">Search</button>
+                            </div>
+                        </form>
+                    </div>
+                    <!-- Advanced search end -->
                     <!-- Property description start -->
                     <div class="property-description tabbing tabbing-box tb2">
                         <ul class="nav nav-tabs" id="myTab" role="tablist">
@@ -339,34 +421,31 @@
                                             <div class="main-title-4">
                                                 <h1><span>Description</span></h1>
                                             </div>
-                                            <div style="overflow-x:auto;">
-                                                <table>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td><strong>Property Type</strong></td>
-                                                            <td><strong>City</strong></td>
-                                                            <td><strong>District</strong></td>
-                                                            <td><strong>State</strong></td>
-                                                            <td><strong>Code</strong></td>
-                                                            <td><strong>How Old</strong></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>
-                                                                @(Model.property_type == 1.ToString() ? "Apartment" : "")
-                                                                @(Model.property_type == 2.ToString() ? "Family House" : "")
-                                                                @(Model.property_type == 3.ToString() ? "PG" : "")
-                                                                @(Model.property_type == 4.ToString() ? "Commercial" : "")
-                                                            </td>
-                                                            <td>@ViewBag.cityname</td>
-                                                            <td>@ViewBag.districtname</td>
-                                                            <td>@ViewBag.statename</td>
-                                                            <td>@Model.property_postal_code</td>
-                                                            <td>@Model.property_age years</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><strong>Property Type</strong></td>
+                                                        <td><strong>City</strong></td>
+                                                        <td><strong>District</strong></td>
+                                                        <td><strong>State</strong></td>
+                                                        <td><strong>Code</strong></td>
+                                                        <td><strong>How Old</strong></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>
+                                                            @(Model.property_type == 1.ToString() ? "Apartment" : "")
+                                                            @(Model.property_type == 2.ToString() ? "Family House" : "")
+                                                            @(Model.property_type == 3.ToString() ? "PG" : "")
+                                                            @(Model.property_type == 4.ToString() ? "Commercial" : "")
+                                                        </td>
+                                                        <td>@ViewBag.cityname</td>
+                                                        <td>@ViewBag.districtname</td>
+                                                        <td>@ViewBag.statename</td>
+                                                        <td>@Model.property_postal_code</td>
+                                                        <td>@Model.property_age years</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -405,6 +484,10 @@
                                     </div>
                                 </div>
                             </div>
+
+
+
+
 
                             <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
                                 <div class="accordion accordion-flush" id="accordionFlushExample3">
@@ -486,26 +569,24 @@
                                             <div class="main-title-4">
                                                 <h1><span>Floor</span> Plans</h1>
                                             </div>
-                                            <div style="overflow-x:auto;">
-                                                <table>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td><strong>Size (sq ft)</strong></td>
-                                                            <td><strong>Rooms</strong></td>
-                                                            <td><strong>Kitchen</strong></td>
-                                                            <td><strong>Balcony</strong></td>
-                                                            <td><strong>Bathrooms</strong></td>
-                                                        </tr>
-                                                        <tr>
-                                                            <td>@Model.property_size</td>
-                                                            <td>@Model.property_room_no</td>
-                                                            <td>@Model.property_kitchen_no</td>
-                                                            <td>@Model.property_balcony_no</td>
-                                                            <td>@Model.property_bathroom_no</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
+                                            <table>
+                                                <tbody>
+                                                    <tr>
+                                                        <td><strong>Size (sq ft)</strong></td>
+                                                        <td><strong>Rooms</strong></td>
+                                                        <td><strong>Kitchen</strong></td>
+                                                        <td><strong>Balcony</strong></td>
+                                                        <td><strong>Bathrooms</strong></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td>@Model.property_size</td>
+                                                        <td>@Model.property_room_no</td>
+                                                        <td>@Model.property_kitchen_no</td>
+                                                        <td>@Model.property_balcony_no</td>
+                                                        <td>@Model.property_bathroom_no</td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
                                         </div>
                                     </div>
                                 </div>
@@ -531,6 +612,7 @@
                     <!-- Property description end -->
                 </div>
                 <!-- Properties details section end -->
+                <!-- Location end -->
                 <!-- Comments section start -->
                 <div class="comments-section sidebar-widget">
                     <!-- Main Title 2 -->
@@ -581,7 +663,7 @@
                         <h1>Leave a Comment</h1>
                     </div>
                     <div class="contact-form">
-                        @using (Html.BeginForm("PropertyDetail", "Home", FormMethod.Post, new { @enctype = "multipart/form-data", id = "ratingForm" }))
+                        @using (Html.BeginForm("PropertyDetail", "BuyProperty", FormMethod.Post, new { @enctype = "multipart/form-data", id = "ratingForm" }))
                         {
                             <div class="row">
                                 <div class="col-md-12">
@@ -625,25 +707,23 @@
                     </div>
                 </div>
                 <!-- Contact 1 end -->
-
             </div>
             <div class="col-lg-4 col-md-12 col-sm-12">
                 <!-- Sidebar start -->
                 <div class="sidebar right">
-                    <!-- Advanced search start -->
-                    <div class="sidebar-widget advanced-search as2">
-                        <div class="main-title-4">
-                            <h1>Location</h1>
-                        </div>
-                        <!-- Location start -->
-                        <div class="location sidebar-widget sw2">
-                            <div class="map">
-
+                    <!-- Location start -->
+                    <div class="location sidebar-widget sw2">
+                        <div class="map">
+                            <!-- Main Title 2 -->
+                            <div class="main-title-4">
+                                <h1><span>Location</span></h1>
+                            </div>
+                            <div id="map" class="contact-map">
+                                @Model.property_map
                             </div>
                         </div>
-                        <!-- Location end -->
                     </div>
-                    <!-- Advanced search end -->
+
                     <!-- Category posts start -->
                     <div class="sidebar-widget category-posts">
                         <div class="main-title-4">
@@ -684,10 +764,8 @@
     </div>
 </div>
 <!-- Intro section end -->
-
 <script type="text/javascript">
     const viewBtn = document.querySelector(".view-modal"),
-        mpopup = document.querySelector(".mpopup"),
         popup = document.querySelector(".popup"),
         close = popup.querySelector(".close"),
         field = popup.querySelector(".field"),
@@ -696,7 +774,6 @@
 
     viewBtn.onclick = () => {
         popup.classList.toggle("show");
-        mpopup.classList.toggle("show");
     }
     close.onclick = () => {
         viewBtn.click();
@@ -715,9 +792,6 @@
         }
     }
 </script>
-
-
-
 <script type="text/javascript">
     function checkdata() {
         var valueStars = document.querySelector('input[name="rating"]:checked').value;

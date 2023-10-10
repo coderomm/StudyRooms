@@ -5,10 +5,11 @@ using System.Web;
 using System.Web.Mvc;
 using StudentsRooms.Models;
 using System.Web.Security;
+using StudentsRooms.Controllers;
 
 namespace StudentsRooms.Views.Home
 {
-    public class UserController : Controller
+    public class UserController : BaseController
     {
         StudentsRoomsEntities db = new StudentsRoomsEntities();
 

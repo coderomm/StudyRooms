@@ -15,9 +15,10 @@ namespace StudentsRooms.Models
     public partial class Review_Table
     {
         public int review_id { get; set; }
-        public Nullable<int> tenant_id { get; set; }
+        public Nullable<int> user_id { get; set; }
         public Nullable<int> property_id { get; set; }
         public string review_comment { get; set; }
         public Nullable<int> review_rating { get; set; }
+        public Nullable<System.DateTime> review_rts { get; set; }
     }
 }

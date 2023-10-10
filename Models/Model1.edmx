@@ -4,7 +4,7 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="StudentsRoomsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="StudentsRoomsModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="District">
           <Key>
             <PropertyRef Name="DistrictId" />
@@ -68,10 +68,11 @@
             <PropertyRef Name="review_id" />
           </Key>
           <Property Name="review_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="tenant_id" Type="int" />
+          <Property Name="user_id" Type="int" />
           <Property Name="property_id" Type="int" />
           <Property Name="review_comment" Type="nvarchar(max)" />
           <Property Name="review_rating" Type="int" />
+          <Property Name="review_rts" Type="datetime" />
         </EntityType>
         <EntityType Name="State">
           <Key>
@@ -88,17 +89,6 @@
           <Property Name="TehsilName" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="DistrictId" Type="smallint" Nullable="false" />
         </EntityType>
-        <EntityType Name="Tenant_Table">
-          <Key>
-            <PropertyRef Name="tenant_id" />
-          </Key>
-          <Property Name="tenant_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="tenant_name" Type="nvarchar(max)" />
-          <Property Name="tenant_mobile" Type="nvarchar(max)" />
-          <Property Name="tenant_email" Type="nvarchar(max)" />
-          <Property Name="status" Type="nvarchar(max)" />
-          <Property Name="rts" Type="nvarchar(max)" />
-        </EntityType>
         <EntityContainer Name="StudentsRoomsModelStoreContainer">
           <EntitySet Name="District" EntityType="Self.District" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Owner_Table" EntityType="Self.Owner_Table" Schema="dbo" store:Type="Tables" />
@@ -106,10 +96,8 @@
           <EntitySet Name="Review_Table" EntityType="Self.Review_Table" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="State" EntityType="Self.State" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Tehsile" EntityType="Self.Tehsile" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="Tenant_Table" EntityType="Self.Tenant_Table" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="StudentsRoomsModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -176,10 +164,11 @@
             <PropertyRef Name="review_id" />
           </Key>
           <Property Name="review_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="tenant_id" Type="Int32" />
+          <Property Name="user_id" Type="Int32" />
           <Property Name="property_id" Type="Int32" />
           <Property Name="review_comment" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="review_rating" Type="Int32" />
+          <Property Name="review_rts" Type="DateTime" Precision="3" />
         </EntityType>
         <EntityType Name="State">
           <Key>
@@ -196,17 +185,6 @@
           <Property Name="TehsilName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DistrictId" Type="Int16" Nullable="false" />
         </EntityType>
-        <EntityType Name="Tenant_Table">
-          <Key>
-            <PropertyRef Name="tenant_id" />
-          </Key>
-          <Property Name="tenant_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="tenant_name" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="tenant_mobile" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="tenant_email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="status" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="rts" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityContainer Name="StudentsRoomsEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Districts" EntityType="Self.District" />
           <EntitySet Name="Owner_Table" EntityType="Self.Owner_Table" />
@@ -214,7 +192,6 @@
           <EntitySet Name="Review_Table" EntityType="Self.Review_Table" />
           <EntitySet Name="States" EntityType="Self.State" />
           <EntitySet Name="Tehsiles" EntityType="Self.Tehsile" />
-          <EntitySet Name="Tenant_Table" EntityType="Self.Tenant_Table" />
         </EntityContainer>
       </Schema>
     </edmx:ConceptualModels>
@@ -287,10 +264,11 @@
             <EntityTypeMapping TypeName="StudentsRoomsModel.Review_Table">
               <MappingFragment StoreEntitySet="Review_Table">
                 <ScalarProperty Name="review_id" ColumnName="review_id" />
-                <ScalarProperty Name="tenant_id" ColumnName="tenant_id" />
+                <ScalarProperty Name="user_id" ColumnName="user_id" />
                 <ScalarProperty Name="property_id" ColumnName="property_id" />
                 <ScalarProperty Name="review_comment" ColumnName="review_comment" />
                 <ScalarProperty Name="review_rating" ColumnName="review_rating" />
+                <ScalarProperty Name="review_rts" ColumnName="review_rts" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -308,18 +286,6 @@
                 <ScalarProperty Name="TehsilId" ColumnName="TehsilId" />
                 <ScalarProperty Name="TehsilName" ColumnName="TehsilName" />
                 <ScalarProperty Name="DistrictId" ColumnName="DistrictId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
-          <EntitySetMapping Name="Tenant_Table">
-            <EntityTypeMapping TypeName="StudentsRoomsModel.Tenant_Table">
-              <MappingFragment StoreEntitySet="Tenant_Table">
-                <ScalarProperty Name="tenant_id" ColumnName="tenant_id" />
-                <ScalarProperty Name="tenant_name" ColumnName="tenant_name" />
-                <ScalarProperty Name="tenant_mobile" ColumnName="tenant_mobile" />
-                <ScalarProperty Name="tenant_email" ColumnName="tenant_email" />
-                <ScalarProperty Name="status" ColumnName="status" />
-                <ScalarProperty Name="rts" ColumnName="rts" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

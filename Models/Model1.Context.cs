@@ -31,6 +31,5 @@ namespace StudentsRooms.Models
         public DbSet<Review_Table> Review_Table { get; set; }
         public DbSet<State> States { get; set; }
         public DbSet<Tehsile> Tehsiles { get; set; }
-        public DbSet<Tenant_Table> Tenant_Table { get; set; }
     }
 }

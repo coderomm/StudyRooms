@@ -6,7 +6,7 @@ using System.Web.Mvc;
 
 namespace StudentsRooms.Controllers
 {
-    public class FaqsController : Controller
+    public class FaqsController : BaseController
     {
         // GET: Faqs
         public ActionResult Index()

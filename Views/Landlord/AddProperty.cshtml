@@ -27,7 +27,8 @@
                                 <div class="col-lg-4  col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="property_name" class="form-label">Property Name</label>
-                                        <input type="text" name="property_name" class="form-control" id="property_name" placeholder="Property Name">
+                                        <input type="text" name="property_name" class="form-control" required="required" id="property_name" placeholder="Property Name">
+                                        @Html.ValidationMessage("property_name", "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-6 col-sm-12">
@@ -37,6 +38,7 @@
                                             <option value="Sale">For Sale</option>
                                             <option value="Rent">For Rent</option>
                                         </select>
+                                        @Html.ValidationMessage("property_purpose", "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="col-lg-4  col-md-6 col-sm-12">
@@ -48,24 +50,28 @@
                                             <option value="3">PG</option>
                                             <option value="4">Commercial</option>
                                         </select>
+                                        @Html.ValidationMessage("property_type", "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="col-lg-4 col-md-6 col-sm-12 property_price_div" id="property_price_div">
                                     <div class="form-group">
                                         <label for="property_price" class="form-label">Property Price</label>
-                                        <input type="text" name="property_price" class="form-control" id="property_price" placeholder="INR">
+                                        <input type="text" name="property_price" class="form-control" required="required" id="property_price" placeholder="INR">
+                                        @Html.ValidationMessage("property_price", "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="col-lg-4  col-md-6 col-sm-12 property_rent_div property_rent_div-d-none" id="property_rent_div">
                                     <div class="form-group">
                                         <label for="property_price" class="form-label">Property Rent</label>
-                                        <input type="text" name="property_rent" class="form-control property_rent" id="property_rent" placeholder="INR">
+                                        <input type="text" name="property_rent" class="form-control property_rent" required="required" id="property_rent" placeholder="INR">
+                                        @Html.ValidationMessage("property_rent", "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="col-lg-4  col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="property_size" class="form-label">Area / Size</label>
-                                        <input type="text" name="property_size" class="form-control" id="property_size" placeholder="SqFt">
+                                        <input type="text" name="property_size" class="form-control" required="required" id="property_size" placeholder="SqFt">
+                                        @Html.ValidationMessage("property_size", "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="col-lg-4  col-md-6 col-sm-12">
@@ -78,6 +84,7 @@
                                             <option value="4">4</option>
                                             <option value="5">5</option>
                                         </select>
+                                        @Html.ValidationMessage("property_room_no", "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="col-lg-4  col-md-6 col-sm-12">
@@ -90,6 +97,7 @@
                                             <option value="4">4</option>
                                             <option value="5">5</option>
                                         </select>
+                                        @Html.ValidationMessage("property_bathroom_no", "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="col-lg-4  col-md-6 col-sm-12">
@@ -100,6 +108,7 @@
                                             <option value="2">2</option>
                                             <option value="3">3</option>
                                         </select>
+                                        @Html.ValidationMessage("property_kitchen_no", "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="col-lg-4  col-md-6 col-sm-12">
@@ -110,13 +119,15 @@
                                             <option value="2">2</option>
                                             <option value="3">3</option>
                                         </select>
+                                        @Html.ValidationMessage("property_balcony_no", "", new { @class = "text-danger" })
                                     </div>
                                 </div>
                                 <div class="col-lg-4  col-md-6 col-sm-12">
                                     <div class="form-group">
                                         <label for="property_age" class="form-label">Property Age</label>
-                                        <input type="text" name="property_age" class="form-control" id="property_age" placeholder="5 Years">
+                                        <input type="text" name="property_age" class="form-control" required="required" id="property_age" placeholder="5 Years">
                                     </div>
+                                    @Html.ValidationMessage("property_age", "", new { @class = "text-danger" })
                                 </div>
                             </div>
                         </div>
@@ -132,41 +143,47 @@
                                         <div class="col-lg-4  col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <div class="dz-default dz-message"><span>Upload video here</span></div>
-                                                <input type="file" accept="video/*" name="property_video" multiple class="dropzone dropzone-design mb-50" />
+                                                <input type="file" accept="video/*" required="required" name="property_video" multiple class="dropzone dropzone-design mb-50" />
+                                                @Html.ValidationMessage("property_video", "", new { @class = "text-danger" })
                                             </div>
                                         </div>
                                         <div class="col-lg-4  col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
-                                                <input type="file" name="property_image1" multiple class="dropzone dropzone-design mb-50" />
-                                            </div>
-                                        </div>
-
-                                        <div class="col-lg-4  col-md-6 col-sm-12">
-                                            <div class="form-group">
-                                                <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
-                                                <input type="file" name="property_image2" class="dropzone dropzone-design mb-50" />
+                                                <input type="file" name="property_image1" required="required" multiple class="dropzone dropzone-design mb-50" />
+                                                @Html.ValidationMessage("property_image1", "", new { @class = "text-danger" })
                                             </div>
                                         </div>
 
                                         <div class="col-lg-4  col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
-                                                <input type="file" name="property_image3" class="dropzone dropzone-design mb-50" />
+                                                <input type="file" name="property_image2" required="required" class="dropzone dropzone-design mb-50" />
+                                                @Html.ValidationMessage("property_image2", "", new { @class = "text-danger" })
                                             </div>
                                         </div>
 
                                         <div class="col-lg-4  col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
-                                                <input type="file" name="property_image4" class="dropzone dropzone-design mb-50" />
+                                                <input type="file" name="property_image3" required="required" class="dropzone dropzone-design mb-50" />
+                                                @Html.ValidationMessage("property_image3", "", new { @class = "text-danger" })
                                             </div>
                                         </div>
 
                                         <div class="col-lg-4  col-md-6 col-sm-12">
                                             <div class="form-group">
                                                 <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
-                                                <input type="file" name="property_image5" class="dropzone dropzone-design mb-50" />
+                                                <input type="file" name="property_image4" required="required" class="dropzone dropzone-design mb-50" />
+                                                @Html.ValidationMessage("property_image4", "", new { @class = "text-danger" })
+                                            </div>
+                                        </div>
+
+                                        <div class="col-lg-4  col-md-6 col-sm-12">
+                                            <div class="form-group">
+                                                <div class="dz-default dz-message"><span>Drop files here to upload</span></div>
+                                                <input type="file" name="property_image5" required="required" class="dropzone dropzone-design mb-50" />
+                                                @Html.ValidationMessage("property_image5", "", new { @class = "text-danger" })
                                             </div>
                                         </div>
                                     </div>
@@ -182,32 +199,37 @@
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label>State</label>
-                                    @Html.DropDownListFor(model => model.property_state, ViewBag.stateList as SelectList, "Select State", new { @class = "search-fields form-control py-0" })
+                                    @Html.DropDownListFor(model => model.property_state, ViewBag.stateList as SelectList, "Select State", new { @class = "search-fields form-control py-0", required = "required" })
+                                    @Html.ValidationMessage("property_state", "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label>District</label>
-                                    @Html.DropDownList("property_district", new SelectList(string.Empty, "Value", "Text"), "Select", new { @class = "search-fields form-control  py-0" })
+                                    @Html.DropDownList("property_district", new SelectList(string.Empty, "Value", "Text"), "Select", new { @class = "search-fields form-control  py-0", required = "required" })
+                                    @Html.ValidationMessage("property_district", "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label>City</label>
-                                    @Html.DropDownList("property_city", new SelectList(string.Empty, "Value", "Text"), "Select", new { @class = "search-fields form-control  py-0" })
+                                    @Html.DropDownList("property_city", new SelectList(string.Empty, "Value", "Text"), "Select", new { @class = "search-fields form-control  py-0", required = "required" })
+                                    @Html.ValidationMessage("property_city", "", new { @class = "text-danger" })
                                 </div>
                             </div>
 
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="inputcode1" class="form-label">Postal Code</label>
-                                    <input type="text" name="property_postal_code" class="form-control" id="property_postal_code" placeholder="Postal Code">
+                                    <input type="text" name="property_postal_code" class="form-control" required="required" id="property_postal_code" placeholder="Postal Code">
+                                    @Html.ValidationMessage("property_postal_code", "", new { @class = "text-danger" })
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-sm-12">
                                 <div class="form-group">
                                     <label for="property_address" class="form-label">Address</label>
-                                    <input type="text" name="property_address" class="form-control" id="property_address" placeholder="Address">
+                                    <input type="text" name="property_address" class="form-control" required="required" id="property_address" placeholder="Address">
+                                    @Html.ValidationMessage("property_address", "", new { @class = "text-danger" })
                                 </div>
                             </div>
                         </div>
@@ -224,32 +246,57 @@
                                             <label for="checkbox1">
                                                 Free Parking
                                             </label>
+                                            @Html.ValidationMessage("property_parking", "", new { @class = "text-danger" })
                                         </div>
                                         <div class="checkbox checkbox-theme checkbox-circle">
                                             <input id="checkbox2" type="checkbox" name="property_ac" value="true" />
                                             <label for="checkbox2">
                                                 Air Condition
                                             </label>
+                                            @Html.ValidationMessage("property_ac", "", new { @class = "text-danger" })
                                         </div>
                                         <div class="checkbox checkbox-theme checkbox-circle">
                                             <input id="checkbox3" type="checkbox" name="property_water_supply" value="true" />
                                             <label for="checkbox3">
                                                 Water Supply
                                             </label>
+                                            @Html.ValidationMessage("property_water_supply", "", new { @class = "text-danger" })
                                         </div>
                                         <div class="checkbox checkbox-theme checkbox-circle">
                                             <input id="checkbox4" type="checkbox" name="property_wifi" value="true" />
                                             <label for="checkbox4">
                                                 WiFi
                                             </label>
+                                            @Html.ValidationMessage("property_wifi", "", new { @class = "text-danger" })
                                         </div>
                                         <div class="checkbox checkbox-theme checkbox-circle">
                                             <input id="checkbox5" type="checkbox" name="property_window" value="true" />
                                             <label for="checkbox5">
                                                 Window Covering
                                             </label>
+                                            @Html.ValidationMessage("property_window", "", new { @class = "text-danger" })
                                         </div>
                                     </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row mb-30 ">
+                            <div class="col-lg-12 col-md-12 col-sm-12">
+                                <div class="main-title-4">
+                                    <h1>Google Map Location Link</h1>
+                                </div>
+                                <div class="form-group">
+                                    <h6>Steps to find google map embeded link -</h6>
+                                    <p>1. Open Google map.</p>
+                                    <p>2. Search for a place. Or, find a place on the map, then touch and hold to drop a pin.</p>
+                                    <p>3. At the bottom, tap the place's name or address.</p>
+                                    <p>4. Tap Share</p>
+                                    <p>5. Tap Embed a map</p>
+                                    <p>6. Copy the iframe src link.</p>
+                                    <p>7. Paste here.</p>
+                                    <input type="text" name="property_map" class="form-control" required="required" id="property_map" placeholder="Paste link here ...">
+                                    @Html.ValidationMessage("property_map", "", new { @class = "text-danger" })
                                 </div>
                             </div>
                         </div>
@@ -257,6 +304,7 @@
                         <div class="row">
                             <div class="col-lg-12">
                                 <div class="form-group mb-0 clearfix">
+                                    
                                     <input id="btnsubmit" type="submit" value="Add Property" class="btn-2 btn-defaults" /><i class="arrow"></i>
                                 </div>
                             </div>
@@ -324,6 +372,7 @@
     $(document).ready(function () {
         $('#property_purpose').on('change', function () {
             var demovalue = $(this).val();
+            alert(demovalue);
             if (demovalue == "Sale") {
                 $("div.property_rent_div").hide();
                 $("div.property_price_div").show();

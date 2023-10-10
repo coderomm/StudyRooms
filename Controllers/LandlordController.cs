@@ -11,7 +11,7 @@ using StudentsRooms.Models;
 namespace StudentsRooms.Controllers
 {
     //[Authorize]
-    public class LandlordController : Controller
+    public class LandlordController : BaseController
     {
         StudentsRoomsEntities db = new StudentsRoomsEntities();
         // GET: Landlord
@@ -77,107 +77,130 @@ namespace StudentsRooms.Controllers
         }
 
         public ActionResult UpdateProperty(int id)
-
         {
-            int owner_id = Convert.ToInt32(Session["UserID"]);
-            Property_Table ot = db.Property_Table.Where(x => x.property_id == id).SingleOrDefault();
-
-            var PropertiesData = (from p in db.Property_Table where p.property_id == id select p).ToList();
-            ViewBag.PropertiesJoinData = PropertiesData;
-
-            List<State> StateList = db.States.ToList();
-            ViewBag.StateList = new SelectList(db.States.ToList().Select(x => new { StateId = x.StateId, StateName = x.StateName }), "StateId", "StateName", ot.property_state);
-
-            List<District> DistrictList = db.Districts.ToList();
-            ViewBag.DistrictList = new SelectList(db.Districts.ToList().Select(x => new { DistrictId = x.DistrictId, DistrictName = x.DistrictName }), "DistrictId", "DistrictName", ot.property_district);
-
-            List<Tehsile> TehsileList = db.Tehsiles.ToList();
-            ViewBag.TehsileList = new SelectList(db.Tehsiles.ToList().Select(x => new { TehsilId = x.TehsilId, TehsilName = x.TehsilName }), "TehsilId", "TehsilName", ot.property_city);
-
-            List<SelectListItem> options = new List<SelectListItem>
+            if (Session["UserID"] != null)
             {
-                new SelectListItem { Text = "Sale", Value = "Sale" },
-                new SelectListItem { Text = "Rent", Value = "Rent" }
-            };
-            ViewBag.selectPurpose = new SelectList(options, "Value", "Text");
-            return View();
+                int owner_id = Convert.ToInt32(Session["UserID"]);
+                Property_Table ot = db.Property_Table.Where(x => x.property_id == id).SingleOrDefault();
+
+                var PropertiesData = (from p in db.Property_Table where p.property_id == id select p).ToList();
+                ViewBag.PropertiesJoinData = PropertiesData;
+
+                List<State> StateList = db.States.ToList();
+                ViewBag.StateList = new SelectList(db.States.ToList().Select(x => new { StateId = x.StateId, StateName = x.StateName }), "StateId", "StateName", ot.property_state);
+
+                List<District> DistrictList = db.Districts.ToList();
+                ViewBag.DistrictList = new SelectList(db.Districts.ToList().Select(x => new { DistrictId = x.DistrictId, DistrictName = x.DistrictName }), "DistrictId", "DistrictName", ot.property_district);
+
+                List<Tehsile> TehsileList = db.Tehsiles.ToList();
+                ViewBag.TehsileList = new SelectList(db.Tehsiles.ToList().Select(x => new { TehsilId = x.TehsilId, TehsilName = x.TehsilName }), "TehsilId", "TehsilName", ot.property_city);
+
+                //List<SelectListItem> options = new List<SelectListItem>
+                //{
+                //    new SelectListItem { Text = "Sale", Value = "Sale" },
+                //    new SelectListItem { Text = "Rent", Value = "Rent" }
+                //};
+                //ViewBag.selectPurpose = new SelectList(options, "Value", "Text");
+                return View();
+            }
+            else
+            {
+                return RedirectToAction("Login", "User");
+            }
         }
         [HttpPost]
+        [ValidateInput(false)]
+
         public ActionResult UpdateProperty(Property_Table property, HttpPostedFileBase property_video, HttpPostedFileBase property_image1, HttpPostedFileBase property_image2, HttpPostedFileBase property_image3, HttpPostedFileBase property_image4, HttpPostedFileBase property_image5)
 
         {
-            Property_Table pt = db.Property_Table.Where(x => x.property_id == property.property_id).SingleOrDefault();
-            pt.property_name = property.property_name;
-            pt.property_purpose = property.property_purpose;
-            pt.property_type = property.property_type;
-            pt.property_price = property.property_price;
-            pt.property_rent = property.property_rent;
-            pt.property_size = property.property_size;
-            pt.property_room_no = property.property_room_no;
-            pt.property_bathroom_no = property.property_bathroom_no;
-            pt.property_kitchen_no = property.property_kitchen_no;
-            pt.property_balcony_no = property.property_balcony_no;
-            pt.property_age = property.property_age;
-            pt.property_address = property.property_address;
-            pt.property_city = property.property_city;
-            pt.property_district = property.property_district;
-            pt.property_state = property.property_state;
-            pt.property_postal_code = property.property_postal_code;
-
-            pt.property_parking = property.property_parking;
-            pt.property_wifi = property.property_wifi;
-            pt.property_ac = property.property_ac;
-            pt.property_water_supply = property.property_water_supply;
-            pt.property_window = property.property_window;
-            pt.property_map = "";
-            pt.status = true;
-            pt.rts = DateTime.Now;
-            pt.owner_id = Convert.ToInt32(Session["UserID"]);
-
-            if (property_image1 != null && property_image1.ContentLength > 0)
+            if (Session["UserID"] != null)
             {
-                var fileName = Path.GetFileName(property_image1.FileName);
-                property_image1.SaveAs(Path.Combine(Server.MapPath("~/Content/images/propertyImages"), fileName));
-                pt.property_image1 = fileName;
-            }
+                Property_Table pt = db.Property_Table.Where(x => x.property_id == property.property_id).SingleOrDefault();
+                pt.property_name = property.property_name;
+                pt.property_purpose = property.property_purpose;
+                if (property.property_purpose == "Sale")
+                {
+                    pt.property_price = property.property_price;
+                    pt.property_rent = null;
+                }
+                if (property.property_purpose == "Rent")
+                {
+                    pt.property_price = null;
+                    pt.property_rent = property.property_rent;
+                }
+                pt.property_type = property.property_type;
+                pt.property_size = property.property_size;
+                pt.property_room_no = property.property_room_no;
+                pt.property_bathroom_no = property.property_bathroom_no;
+                pt.property_kitchen_no = property.property_kitchen_no;
+                pt.property_balcony_no = property.property_balcony_no;
+                pt.property_age = property.property_age;
+                pt.property_address = property.property_address;
+                pt.property_city = property.property_city;
+                pt.property_district = property.property_district;
+                pt.property_state = property.property_state;
+                pt.property_postal_code = property.property_postal_code;
 
-            if (property_image2 != null && property_image2.ContentLength > 0)
+                pt.property_parking = property.property_parking;
+                pt.property_wifi = property.property_wifi;
+                pt.property_ac = property.property_ac;
+                pt.property_water_supply = property.property_water_supply;
+                pt.property_window = property.property_window;
+                pt.property_map = property.property_map;
+                pt.status = true;
+                pt.rts = DateTime.Now;
+                pt.owner_id = Convert.ToInt32(Session["UserID"]);
+
+                if (property_image1 != null && property_image1.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(property_image1.FileName);
+                    property_image1.SaveAs(Path.Combine(Server.MapPath("~/Content/images/propertyImages"), fileName));
+                    pt.property_image1 = fileName;
+                }
+
+                if (property_image2 != null && property_image2.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(property_image2.FileName);
+                    property_image2.SaveAs(Path.Combine(Server.MapPath("~/Content/images/propertyImages"), fileName));
+                    pt.property_image2 = fileName;
+                }
+
+                if (property_image3 != null && property_image3.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(property_image3.FileName);
+                    property_image3.SaveAs(Path.Combine(Server.MapPath("~/Content/images/propertyImages"), fileName));
+                    pt.property_image3 = fileName;
+                }
+
+                if (property_image4 != null && property_image4.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(property_image4.FileName);
+                    property_image4.SaveAs(Path.Combine(Server.MapPath("~/Content/images/propertyImages"), fileName));
+                    pt.property_image4 = fileName;
+                }
+
+                if (property_image5 != null && property_image5.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(property_image5.FileName);
+                    property_image5.SaveAs(Path.Combine(Server.MapPath("~/Content/images/propertyImages"), fileName));
+                    pt.property_image5 = fileName;
+                }
+
+                if (property_video != null)
+                {
+                    string fileName = Path.GetFileName(property_video.FileName);
+                    property_video.SaveAs(Path.Combine(Server.MapPath("~/Content/VideoFileUpload"), fileName));
+                    pt.property_video = fileName;
+                }
+
+                db.SaveChanges();
+                return RedirectToAction("UpdateProperty", "Landlord", new { id = property.property_id });
+            }
+            else
             {
-                var fileName = Path.GetFileName(property_image2.FileName);
-                property_image2.SaveAs(Path.Combine(Server.MapPath("~/Content/images/propertyImages"), fileName));
-                pt.property_image2 = fileName;
+                return RedirectToAction("Login", "User");
             }
-
-            if (property_image3 != null && property_image3.ContentLength > 0)
-            {
-                var fileName = Path.GetFileName(property_image3.FileName);
-                property_image3.SaveAs(Path.Combine(Server.MapPath("~/Content/images/propertyImages"), fileName));
-                pt.property_image3 = fileName;
-            }
-
-            if (property_image4 != null && property_image4.ContentLength > 0)
-            {
-                var fileName = Path.GetFileName(property_image4.FileName);
-                property_image4.SaveAs(Path.Combine(Server.MapPath("~/Content/images/propertyImages"), fileName));
-                pt.property_image4 = fileName;
-            }
-
-            if (property_image5 != null && property_image5.ContentLength > 0)
-            {
-                var fileName = Path.GetFileName(property_image5.FileName);
-                property_image5.SaveAs(Path.Combine(Server.MapPath("~/Content/images/propertyImages"), fileName));
-                pt.property_image5 = fileName;
-            }
-
-            if (property_video != null)
-            {
-                string fileName = Path.GetFileName(property_video.FileName);
-                property_video.SaveAs(Path.Combine(Server.MapPath("~/Content/VideoFileUpload"), fileName));
-                pt.property_video = fileName;
-            }
-
-            db.SaveChanges();
-            return RedirectToAction("UpdateProperty", "Landlord", new { id = property.property_id });
         }
 
         public ActionResult AddProperty()
@@ -193,7 +216,7 @@ namespace StudentsRooms.Controllers
                 return RedirectToAction("Login", "User");
             }
         }
-        [HttpPost]
+        [HttpPost, ValidateInput(false)]
         public ActionResult AddProperty(Property_Table property, HttpPostedFileBase property_video, HttpPostedFileBase property_image1, HttpPostedFileBase property_image2, HttpPostedFileBase property_image3, HttpPostedFileBase property_image4, HttpPostedFileBase property_image5)
         {
             try

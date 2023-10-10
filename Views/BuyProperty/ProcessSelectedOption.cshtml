@@ -1,0 +1,436 @@
+﻿model IEnumerable<StudentsRooms.Models.Property_Table>
+
+@{
+    ViewBag.Title = "Explore Properties";
+}
+
+<!-- Properties section body start -->
+<div id="propertiesList" class="properties-section-body content-area my-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 col-md-12 col-xs-12">
+                <!-- Option bar start -->
+                <div class="option-bar">
+                    <div class="row">
+                        <div class="col-lg-5 col-md-5 col-sm-5">
+                            <h4>
+                                <span class="heading-icon">
+                                    <i class="fa fa-th-list"></i>
+                                </span>
+                                <span class="title">Properties List</span>
+                            </h4>
+                        </div>
+                        <div class="col-lg-7 col-md-7 col-sm-7">
+                            <div class="sorting-options advanced-search">
+                                @*<select class="selectpicker search-fields sorting" onchange="this.options[this.selectedIndex].value && (window.location = this.options[this.selectedIndex].value);">
+                                        <option value="" style="background-color: rgb(0 0 0 / 25%);">Select Option</option>
+                                        <option value="/BuyProperty">Clear All Filters</option>
+                                        <option value="/BuyProperty?Sort=Larger&&state=@Request.QueryString["property_state"]&&district=@Request.QueryString["property_district"]&&city=@Request.QueryString["property_city"]">Area (Large To Small)</option>
+                                        <option value="/BuyProperty?Sort=Smaller&&state=@Request.QueryString["property_state"]&&district=@Request.QueryString["property_district"]&&city=@Request.QueryString["property_city"]">Area (Small To Large)</option>
+                                        <option value="/BuyProperty?Sort=High+To+Low&&state=@Request.QueryString["property_state"]&&district=@Request.QueryString["property_district"]&&city=@Request.QueryString["property_city"]">Price (High To Low)</option>
+                                        <option value="/BuyProperty?Sort=Low+To+High&&state=@Request.QueryString["property_state"]&&district=@Request.QueryString["property_district"]&&city=@Request.QueryString["property_city"]">Price (Low To High)</option>
+                                    </select>*@
+                                <select id="mySelect" class="selectpicker search-fields sorting">
+                                    <option value="0">Clear All Filters</option>
+                                    <option value="1">Area (Large To Small)</option>
+                                    <option value="2">Area (Small To Large)</option>
+                                    <option value="3">Price (High To Low)</option>
+                                    <option value="4">Price (Low To High)</option>
+                                </select>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Option bar end -->
+                <!-- Property start -->
+                    @foreach (var item in ViewBag.PropertiesJoinData)
+                    {
+                        <div class="propertiesListItem property row g-0 fp2 clearfix wow fadeInUp delay-03s">
+                            <div class="col-lg-5 col-md-5 col-sm-12">
+                                <!-- Property img -->
+                                <div class="property-img">
+                                    <div class="property-tag button alt featured">Featured</div>
+                                    <div class="property-tag button sale">For @item.property_purpose</div>
+                                    <div class="property-price">Rs @item.property_price</div>
+                                    <img src="@Url.Content("~/Content/images/propertyImages/"+ @item.property_image1)" alt="property image" class="i~/Content/img-responsive hp-1">
+
+                                    <div class="property-overlay">
+                                        <a href="properties-details.html" class="overlay-link">
+                                            <i class="fa fa-link"></i>
+                                        </a>
+                                        <a class="overlay-link property-video" title="Lexus GS F">
+                                            <i class="fa fa-video-camera"></i>
+                                        </a>
+                                        <div class="property-magnify-gallery">
+                                            <a href="~/Content/img/properties/properties-1.jpg" class="overlay-link">
+                                                <i class="fa fa-expand"></i>
+                                            </a>
+                                            <a href="~/Content/img/properties/properties-2.jpg" class="hidden"></a>
+                                            <a href="~/Content/img/properties/properties-3.jpg" class="hidden"></a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-lg-7 col-md-7 col-sm-12 property-content">
+                                <div class="info">
+                                    <!-- title -->
+                                    <h1 class="title">
+                                        <a href="properties-details.html">@item.property_name</a>
+                                    </h1>
+                                    <!-- Property address -->
+                                    <h3 class="property-address">
+                                        <a href="properties-details.html">
+                                            <i class="fa fa-map-marker"></i>@item.property_address,
+                                        </a>
+                                    </h3>
+                                    <!-- Facilities List -->
+                                    <ul class="facilities-list clearfix">
+                                        <li>
+                                            <i class="flaticon-square-layouting-with-black-square-in-east-area"></i>
+                                            <span>@item.property_size sq ft</span>
+                                        </li>
+                                        <li>
+                                            <i class="flaticon-bed"></i>
+                                            <span>@item.property_room_no Beds</span>
+                                        </li>
+                                        <li>
+                                            <i class="flaticon-holidays"></i>
+                                            <span> @item.property_bathroom_no Baths</span>
+                                        </li>
+                                        <li>
+                                            <i class="flaticon-building"></i>
+                                            <span> @item.property_balcony_no Balcony</span>
+                                        </li>
+                                        <li>
+                                            <i class="flaticon-monitor"></i>
+                                            <span> @item.property_age Years Old </span>
+                                        </li>
+
+                                        <li>
+                                            <i class="flaticon-vehicle"></i>
+                                            <span> @item.property_parking Parking</span>
+                                        </li>
+                                    </ul>
+                                    <!-- Property footer -->
+                                </div>
+                                <div class="property-footer">
+                                    <span class="left">
+                                        <a href="#"><i class="fa fa-user"></i>@item.owner_name</a>
+                                    </span>
+                                    <span class="right">
+                                        <i class="fa fa-calendar"></i>@item.rts Days ago
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                
+                <!-- Property end -->
+                <!-- Pagination box start -->
+                <div class="pagination-box text-center">
+                    <nav aria-label="Page navigation example">
+                        <ul class="pagination">
+                            <li class="page-item">
+                                <a class="page-link" href="#">Prev</a>
+                            </li>
+                            <li class="page-item"><a class="page-link  active" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item">
+                                <a class="page-link" href="#">Next</a>
+                            </li>
+                        </ul>
+                    </nav>
+                </div>
+                <!-- Pagination box end -->
+            </div>
+
+            <div class="col-lg-4 col-md-12 col-xs-12">
+                <!-- Advanced search start -->
+                <div class="sidebar-widget advanced-search">
+                    <div class="main-title-4">
+                        <h1>Advanced  Search</h1>
+                    </div>
+                    @using (Html.BeginForm("Index", "BuyProperty", FormMethod.Get))
+                    {
+                        <div class="form-group">
+                            @Html.DropDownList("property_state", ViewBag.stateList as SelectList, "Select State", new { @class = "search-fields form-control py-0" })
+                        </div>
+                        <div class="form-group">
+                            @Html.DropDownList("property_district", new SelectList(string.Empty, "Value", "Text"), "Select District", new { @class = "search-fields form-control  py-0" })
+                        </div>
+                        <div class="form-group">
+                            @Html.DropDownList("property_city", new SelectList(string.Empty, "Value", "Text"), "Select City", new { @class = "search-fields form-control  py-0" })
+                        </div>
+
+                        <div class="form-group">
+                            <select class="selectpicker search-fields" name="property_type" id="property_type">
+                                <option value="0" style="color: #95c41f;">Select Type</option>
+                                <option value="1">Apartment</option>
+                                <option value="2">Family House</option>
+                                <option value="3">PG</option>
+                                <option value="4">Commercial</option>
+                            </select>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <select class="selectpicker search-fields" name="property_room_no" id="property_room_no">
+                                        <option value="0">Bedrooms</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <select class="selectpicker search-fields" name="property_bathroom_no" id="property_bathroom_no">
+                                        <option value="0">Bathrooms</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                        <option value="4">4</option>
+                                        <option value="5">5</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <select class="selectpicker search-fields" name="property_balcony_no" id="property_balcony_no">
+                                        <option value="0">Balcony</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-lg-6 col-md-6 col-sm-6">
+                                <div class="form-group">
+                                    <select class="selectpicker search-fields" name="property_kitchen_no" id="property_kitchen_no">
+                                        <option value="0">Kitchen</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="range-slider">
+                            <label>Area</label>
+                            <div data-min="0" data-max="10000" data-unit="Sq ft" data-min-name="min_area" data-max-name="max_area" class="range-slider-ui ui-slider" aria-disabled="false"></div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="range-slider">
+                            <label>Price</label>
+                            <div data-min="0" data-max="150000" data-unit="USD" data-min-name="min_price" data-max-name="max_price" class="range-slider-ui ui-slider" aria-disabled="false"></div>
+                            <div class="clearfix"></div>
+                        </div>
+                        <div class="form-group mb-0">
+                            <button type="submit" class="button-md button-theme btn-3 w-100">Search</button>
+                        </div>
+                    }
+                </div>
+                <!-- Advanced search end -->
+                <!-- Category posts start -->
+                <div class="sidebar-widget category-posts">
+                    <div class="main-title-4">
+                        <h1>Popular Category</h1>
+                    </div>
+                    <ul class="list-unstyled list-cat">
+                        <li><a href="#">Single Family </a> <span>(45)  </span></li>
+                        <li><a href="#">Apartment  </a> <span>(21)  </span></li>
+                        <li><a href="#">Condo </a> <span>(23)  </span></li>
+                        <li><a href="#">Multi Family </a> <span>(19)  </span></li>
+                        <li><a href="#">Villa </a> <span>(19)  </span></li>
+                        <li><a href="#">Other  </a> <span>(22)  </span></li>
+                    </ul>
+                </div>
+                <!-- Category posts end -->
+                <!-- Popular posts start -->
+                <div class="sidebar-widget popular-posts">
+                    <div class="main-title-4">
+                        <h1>Recent Properties</h1>
+                    </div>
+                    <div class="d-flex mb-3 popular-posts-box">
+                        <a class="pr-3" href="properties-details.html">
+                            <img src="~/Content/img/properties/small-properties-2.jpg" alt="small-photo" class="flex-shrink-0 me-3">
+                        </a>
+                        <div class="detail align-self-center">
+                            <h4>
+                                <a href="properties-details.html">Modern Family Home</a>
+                            </h4>
+                            <div class="listing-post-meta">
+                                Sep 18, 2021 | <a href="#">$470,00</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex mb-3 popular-posts-box">
+                        <a class="pr-3" href="properties-details.html">
+                            <img src="~/Content/img/properties/small-properties-1.jpg" alt="small-photo" class="flex-shrink-0 me-3">
+                        </a>
+                        <div class="detail align-self-center">
+                            <h4>
+                                <a href="properties-details.html">Sweet Family Home</a>
+                            </h4>
+                            <div class="listing-post-meta">
+                                Aug 18, 2020 | <a href="#">$485,00</a>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="d-flex popular-posts-box">
+                        <a class="pr-3" href="properties-details.html">
+                            <img src="~/Content/img/properties/small-properties-3.jpg" alt="small-photo" class="flex-shrink-0 me-3">
+                        </a>
+                        <div class="detail align-self-center">
+                            <h4>
+                                <a href="properties-details.html">Beautful Single Home</a>
+                            </h4>
+                            <div class="listing-post-meta">
+                                Aug Feb, 2021 | <a href="#">$850,00</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Popular posts end -->
+                <!-- Helping box Start -->
+                <div class="sidebar-widget helping-box clearfix">
+                    <div class="main-title-4">
+                        <h1>Helping Center</h1>
+                    </div>
+                    <div class="helping-center">
+                        <div class="icon"><i class="fa fa-map-marker"></i></div>
+                        <h4>Address</h4>
+                        <p>123 Kathal St. Tampa City,</p>
+                    </div>
+                    <div class="helping-center">
+                        <div class="icon"><i class="fa fa-phone"></i></div>
+                        <h4>Phone</h4>
+                        <p><a href="tel:+55-417-634-7071">+55 417 634 7071</a> </p>
+                    </div>
+                </div>
+                <!-- Helping box end -->
+                <!-- Latest reviews start -->
+                <div class="sidebar-widget latest-reviews mb-30">
+                    <div class="main-title-4">
+                        <h1>Latest  Reviews</h1>
+                    </div>
+                    <div class="latest-reviews-box d-flex mb-4">
+                        <a class="pr-3" href="#">
+                            <img src="~/Content/img/avatar/avatar-1.jpg" alt="avatar" class="flex-shrink-0 me-3">
+                        </a>
+                        <div class="detail">
+                            <h3><a href="#">John Antony</a></h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiamrisus tortor, accumsan at,</p>
+                        </div>
+                    </div>
+                    <div class="latest-reviews-box d-flex">
+                        <a class="pr-3" href="#">
+                            <img src="~/Content/img/avatar/avatar-2.jpg" alt="avatar" class="flex-shrink-0 me-3">
+                        </a>
+                        <div class="detail">
+                            <h3><a href="#">Karen Paran</a></h3>
+                            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiamrisus tortor, accumsan at,</p>
+                        </div>
+                    </div>
+                </div>
+                <!-- Latest reviews end -->
+            </div>
+        </div>
+    </div>
+</div>
+<!-- Properties section body end -->
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script>
+    $(function () {
+        $('#property_state').change(function () {
+            //alert($('#property_state').val());
+            $.getJSON('/BuyProperty/DistrictList/' + $('#property_state').val(), function (data) {
+                var items = '';
+                var dropdown = document.getElementById("property_district");
+                $(dropdown).empty();
+
+                var newOption1 = document.createElement("option");
+                newOption1.innerHTML = "Select District";  //innerHTML & not Text
+                newOption1.value = "0";
+                dropdown.options.add(newOption1);
+
+                $.each(data, function (i, district) {
+                    var newOption = document.createElement("option");
+                    newOption.innerHTML = district.Text;  //innerHTML & not Text
+                    newOption.value = district.Value;
+                    dropdown.options.add(newOption);
+                });
+            });
+        });
+    });
+</script>
+
+<script>
+    $(function () {
+        $('#property_district').change(function () {
+            //alert($('#property_state').val());
+            $.getJSON('/BuyProperty/TehsilList/' + $('#property_district').val(),
+                function (data) {
+                    var items = '';
+                    var dropdown = document.getElementById("property_city");
+                    $(dropdown).empty();
+
+                    var newOption1 = document.createElement("option");
+                    newOption1.innerHTML = "Select City";  //innerHTML & not Text
+                    newOption1.value = "0";
+                    dropdown.options.add(newOption1);
+
+                    $.each(data, function (i, district) {
+                        var newOption = document.createElement("option");
+                        newOption.innerHTML = district.Text;  //innerHTML & not Text
+                        newOption.value = district.Value;
+                        dropdown.options.add(newOption);
+                    });
+                });
+        });
+    });
+</script>
+
+
+
+<script>
+    $(function () {
+        $('#mySelect').on('change', function () {
+            var selectedOption = $(this).val();
+            $.ajax({
+                url: '/BuyProperty/ProcessSelectedOption',
+                type: 'POST',
+                data: { selectedOption: selectedOption },
+                //success: function (data) {
+                //    $(".propertiesListItem").html($(data).find(".propertiesListItem").html());
+                //},
+
+                success: function (data) {
+                    var propertiesList = $(data).find('.propertiesListItem');
+                    $(".propertiesListItem").html('');
+                    propertiesList.each(function () {
+                        $(".propertiesListItem").append($(this));
+                    });
+                },
+                //success: function (data) {
+                //    var propertiesList = $(data).find('.propertiesListItem');
+                //    $("#aaa").html('');
+                //    propertiesList.each(function () {
+                //        $("#aaa").append($(this));
+                //    });
+                //},
+                error: function (xhr, status, error) {
+                    console.log(error);
+                }
+            });
+        });
+    });
+</script>

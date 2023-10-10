@@ -39,6 +39,18 @@ Version:    1.1.0
     30. Sub Footer / .sub-footer
 -------------------------------------------------------------------*/
 /** GLOBAL CLASSES **/
+
+
+@media (max-width: 1023px) {
+    .banner .w-17 .f-right {
+        float: right !important;
+    }
+
+    #f-right {
+        float: right !important;
+    }
+}
+
 html,
 body {
     height: 100%;
@@ -297,7 +309,7 @@ input[type=checkbox]:checked+label:before {
 
 .button-md {
     cursor: pointer;
-    padding: 11px 25px 11px 25px;
+    padding: 7.5px 14px 7.5px;
     text-transform: uppercase;
     color: #555;
     background: transparent;
@@ -1320,6 +1332,7 @@ input[type=checkbox]:checked+label:before {
     position: relative;
     display: block;
     overflow: hidden;
+    max-height: 233px;
 }
 
 .property-img:before {
@@ -1357,19 +1370,7 @@ input[type=checkbox]:checked+label:before {
     right: 15px;
     z-index: 20;
 }
-.property .button, input[type="submit"] {
-    font-size: 12px;
-    font-weight: 600;
-    padding: 6px 14px 4px;
-    border-radius: 2px;
-    color: #fff;
-    border: none;
-    background-color: rgb(0 0 0 / 25%);
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    display: inline-block;
-    z-index: 20;
-}
+
 .property-content {
     padding: 20px;
 }
@@ -1386,6 +1387,20 @@ input[type=checkbox]:checked+label:before {
 
 .property-content p {
     margin: 10px 0 20px;
+}
+
+.property .button {
+    font-size: 12px;
+    font-weight: 600;
+    padding: 6px 14px 4px;
+    border-radius: 2px;
+    color: #fff;
+    border: none;
+    background-color: rgb(0 0 0 / 25%);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    display: inline-block;
+    z-index: 20;
 }
 
 .ratings {
@@ -2387,7 +2402,7 @@ input[type=checkbox]:checked+label:before {
     height: 50px;
     line-height: 50px;
     position: absolute;
-    top: 45%;
+    top: 41%;
     border-radius: 100px;
     z-index: 999;
     left: -5px;
@@ -2413,7 +2428,7 @@ input[type=checkbox]:checked+label:before {
     height: 50px;
     line-height: 50px;
     position: absolute;
-    top: 45%;
+    top: 41%;
     z-index: 999;
     right: -5px;
     text-align: center;
@@ -2611,6 +2626,7 @@ input[type=checkbox]:checked+label:before {
     transition: 0.3s cubic-bezier(0.24, 0.74, 0.58, 1);
     width: 100% !important;
     border-radius: 5px;
+    height: 440px;
 }
 
 .popular-places-box-2:before {
@@ -8047,6 +8063,10 @@ table th {
     border-right: 1px solid rgba(0, 0, 0, 0.07);
 }
 
+table th {
+    padding: 10px 15px;
+}
+
 .floor-plans table td {
     font-size: 15px;
 }
@@ -10140,6 +10160,7 @@ table.manage-table .action a {
 
     .content-area {
         padding: 70px 0 40px;
+        margin-top: 70px;
     }
 
     .content-area-2 {

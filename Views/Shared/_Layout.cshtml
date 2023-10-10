@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <title>@ViewBag.Title - Study Rooms</title>
 
     <!-- Google Tag Manager -->
     <script>
@@ -16,6 +16,8 @@
                     'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
         })(window, document, 'script', 'dataLayer', 'GTM-TNL8QV6');</script>
     <!-- End Google Tag Manager -->
+    <script src="jquery-3.6.4.min.js"></script>
+
     <!-- External CSS libraries -->
     <link href="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/themes/blitzer/jquery-ui.css"
           rel="Stylesheet" type="text/css" />
@@ -137,7 +139,7 @@
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light">
                 <a href="@Url.Action("Index", "Home")" class="navbar-brand">
-                    <img src="~/Content/images/logo/STUD ROOMS.png" title="logo" alt="logo" class="img-fluid" />
+                    <img src="~/Content/images/logo/StudyRoomsLogo.png" title="logo" alt="logo" class="img-fluid" />
                 </a>
                 <button class="navbar-toggler" id="drawer" type="button">
                     <span class="fa fa-bars"></span>
@@ -178,19 +180,21 @@
                 </a>
             </div>
             <div class="sidebar-navigation">
-                <h3 class="heading">Pages</h3>
                 <ul class="menu-list">
                     <li>
-                        <a href="index.html" class="active pt0">Home</a>
+                        <a href="" class="active pt0">Home</a>
                     </li>
                     <li>
-                        <a href="properties-list-rightside.html">Explore Properties</a>
+                        <a href="BuyProperty">Buy</a>
                     </li>
                     <li>
-                        <a href="login.html">List Property/Rooms </a>
+                        <a href="RentProperty">Rent</a>
                     </li>
                     <li>
-                        <a href="submit-property.html">Submit Property</a>
+                        <a href="Faqs">Faqs</a>
+                    </li>
+                    <li>
+                        <a href="">Submit Property</a>
                     </li>
                 </ul>
             </div>
@@ -255,19 +259,19 @@
                             <ul class="personal-info">
                                 <li>
                                     <i class="fa fa-map-marker"></i>
-                                    Address: 360 Harvest St, North Subract, London. United States Of Amrica.
+                                    Address: 360 Sanjay Colony, North Bhilwara, Rajasthan. India.
                                 </li>
                                 <li>
                                     <i class="fa fa-envelope"></i>
-                                    Email:<a href="mailto:sales@hotelempire.com">info@themevessel.com</a>
+                                    Email:<a href="mailto:omsharma9367@gmail.com">omsharma9367@gmail.com</a>
                                 </li>
                                 <li>
                                     <i class="fa fa-phone"></i>
-                                    Phone: <a href="tel:+55-417-634-7071">+0477 85X6 552</a>
+                                    Phone: <a href="tel:+918999292525">899929 2525</a>
                                 </li>
                                 <li>
                                     <i class="fa fa-fax"></i>
-                                    Fax: +0487 85X6 224
+                                    Fax: +91 899929 2525
                                 </li>
                             </ul>
                         </div>
@@ -276,20 +280,24 @@
                     <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                         <div class="footer-item">
                             <div class="main-title-4">
-                                <h1>Links</h1>
+                                <h1>Visit</h1>
                             </div>
                             <ul class="links">
                                 <li>
-                                    <a href="index.html">Home</a>
+                                    <a href="">Home</a>
                                 </li>
                                 <li>
-                                    <a href="faq.html">Faqs</a>
+                                    <a href="User/Login">Add New Property</a>
+                                </li>
+
+                                <li>
+                                    <a href="BuyProperty">Buy</a>
                                 </li>
                                 <li>
-                                    <a href="properties-list-rightside.html">Explore Properties</a>
+                                    <a href="RentProperty">Rent</a>
                                 </li>
                                 <li>
-                                    <a href="login.html">List New Property</a>
+                                    <a href="Faqs">Faqs</a>
                                 </li>
                             </ul>
                         </div>
@@ -298,47 +306,42 @@
                     <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                         <div class="footer-item popular-posts">
                             <div class="main-title-4">
-                                <h1>Popular Posts</h1>
+                                <h1>Popular Properties</h1>
                             </div>
-                            <div class="d-flex mb-3 popular-posts-box">
-                                <a class="pr-3" href="properties-details.html">
-                                    <img src="~/Content/img/properties/small-properties-2.jpg" alt="small-photo" class="flex-shrink-0 me-3">
-                                </a>
-                                <div class="detail align-self-center">
-                                    <h4>
-                                        <a href="properties-details.html">Modern Family Home</a>
-                                    </h4>
-                                    <div class="listing-post-meta">
-                                        Sep 18, 2021 | <a href="#">$470,00</a>
+                            
+                            @foreach (var item in ViewBag.footer_listings)
+                            {
+                                <div class="d-flex mb-3 popular-posts-box">
+                                    <a class="pr-3" href="@Url.Action("PropertyDetail", "Home",new { id = @item.property_id })">
+                                        <img src="@Url.Content("~/Content/images/propertyImages/" + @item.property_image1)" alt="small-photo" class="flex-shrink-0 me-3">
+                                    </a>
+                                    <div class="detail align-self-center">
+                                        <h4>
+                                            <a href="@Url.Action("PropertyDetail", "Home",new { id = @item.property_id })">@item.property_name</a>
+                                        </h4>
+                                        <div class="listing-post-meta">
+                                            @using System.Globalization
+                                            @{
+                                                DateTime pastDatetime = @item.rts; // parse past datetime from @item.rts
+                                                TimeSpan timeSince = DateTime.Now.Subtract(pastDatetime); // calculate difference
+                                                int daysAgo = (int)timeSince.TotalDays; // get total days
+                                            }
+                                            @daysAgo Days ago | <a href="@Url.Action("PropertyDetail", "Home",new { id = @item.property_id })">
+                                                @{
+                                                    if (@item.property_purpose == "Sale")
+                                                    {
+                                                        <text>Rs @item.property_price</text>
+                                                    }
+                                                    else
+                                                    {
+                                                        <text>Rs @item.property_rent / month</text>
+                                                    }
+                                                }
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                            <div class="d-flex mb-3 popular-posts-box">
-                                <a class="pr-3" href="properties-details.html">
-                                    <img src="~/Content/img/properties/small-properties-1.jpg" alt="small-photo" class="flex-shrink-0 me-3">
-                                </a>
-                                <div class="detail align-self-center">
-                                    <h4>
-                                        <a href="properties-details.html">Sweet Family Home</a>
-                                    </h4>
-                                    <div class="listing-post-meta">
-                                        Aug 18, 2020 | <a href="#">$485,00</a>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="d-flex popular-posts-box">
-                                <a class="pr-3" href="properties-details.html">
-                                    <img src="~/Content/img/properties/small-properties-3.jpg" alt="small-photo" class="flex-shrink-0 me-3">
-                                </a>
-                                <div class="detail align-self-center">
-                                    <h4>
-                                        <a href="properties-details.html">Beautful Single Home</a>
-                                    </h4>
-                                    <div class="listing-post-meta">
-                                        Aug Feb, 2021 | <a href="#">$850,00</a>
-                                    </div>
-                                </div>
-                            </div>
+                            }
                         </div>
                     </div>
                 </div>
@@ -348,35 +351,27 @@
             <div class="container">
                 <div class="row clearfix">
                     <div class="col-lg-6 col-md-12 col-sm-12">
-                        <p>&copy; @DateTime.Now.Year <a href="http://themevessel.com/" target="_blank">Theme Vessel</a>. All Rights Reserved.</p>
+                        <p>&copy; @DateTime.Now.Year <a href="http://omsharma.pcbhilwara.com/" target="_blank">Study Rooms</a>. All Rights Reserved.</p>
                     </div>
                     <div class="col-lg-6 col-md-12 col-sm-12">
                         <ul class="social-list clearfix">
                             <li>
-                                <a href="#" class="facebook-bg">
-                                    <i class="fa fa-facebook"></i>
+                                <a href="https://www.instagram.com/1ommsharma/" class="facebook-bg">
+                                    <i class="fa fa-instagram"></i>
                                 </a>
                             </li>
+
                             <li>
-                                <a href="#" class="twitter-bg">
-                                    <i class="fa fa-twitter"></i>
-                                </a>
-                            </li>
-                            <li>
-                                <a href="#" class="linkedin-bg">
+                                <a href="https://www.linkedin.com/in/om-sharma-9abb3a258/" class="linkedin-bg">
                                     <i class="fa fa-linkedin"></i>
                                 </a>
                             </li>
                             <li>
-                                <a href="#" class="google-bg">
+                                <a href="mailto:omsharma9367@gmail.com" class="google-bg">
                                     <i class="fa fa-google-plus"></i>
                                 </a>
                             </li>
-                            <li>
-                                <a href="#" class="rss-bg">
-                                    <i class="fa fa-rss"></i>
-                                </a>
-                            </li>
+
                         </ul>
                     </div>
                 </div>
@@ -384,6 +379,8 @@
         </div>
     </footer>
     <!-- Footer end -->
+
+
 
     <script src="~/Scripts/js/bootstrap.bundle.min.js"></script>
     <script src="~/Scripts/js/jquery.min.js"></script>
@@ -412,16 +409,15 @@
     <script src="~/Scripts/js/ie10-viewport-bug-workaround.js"></script>
 
     <!-- Autocomplete start -->
-    @*<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.10.0.min.js" type="text/javascript"></script>*@
     <script src="https://ajax.aspnetcdn.com/ajax/jquery.ui/1.9.2/jquery-ui.min.js" type="text/javascript"></script>
+
     <script type="text/javascript">
-        var districtIdValue;
         $(function () {
-            $("#DistrictName").autocomplete({
+            $("#property_state").autocomplete({
                 source: function (request, response) {
                     $.ajax({
-                        url: '/Home/AutoComplete/',
-                        data: "{'prefix': '" + request.term + "' , value:'" + $("#DistrictName").val() + "'}",
+                        url: '/Home/StateAutoComplete/',
+                        data: "{'prefix': '" + request.term + "' , value:'" + $("#property_state").val() + "'}",
                         dataType: "json",
                         type: "POST",
                         contentType: "application/json; charset=utf-8",
@@ -431,7 +427,7 @@
                             }))
                         },
                         function() {
-                            alert($("#DistrictName").val());
+                            alert($("#property_state").val());
                         },
 
                         error: function (response) {
@@ -443,47 +439,108 @@
                     });
                 },
                 select: function (e, i) {
-                    $("#DistrictId").val(i.item.val);
+                    $("#property_state1").val(i.item.val);
                 },
                 minLength: 1
             });
         });
     </script>
-    <!-- Autocomplete end -->
-    @*<script>
-            $(function () {
-                $('#sortProperties').change(function () {
-                    alert($('#sortProperties').val());
-                    $.getJSON('/ExploreProperties/listdata/' + $('#sortProperties').val(),
-                        function (data) {
-                            var items = '';
-                            $.each(data, function (i, district) {
-                                var divtag = "<h1>This is tryial</h1>";
-                                alert(district.StateName);
-                            });
-                        });
-                });
-            });
-        </script>*@
+    <script type="text/javascript">
+        $(function () {
+            $("#property_district").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: '/Home/AutoComplete/',
+                        data: "{'prefix': '" + request.term + "' , value:'" + $("#property_district").val() + "'}",
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return item;
+                            }))
+                        },
+                        function() {
+                            alert($("#property_district").val());
+                        },
 
-    @*<script>
-        $(document).ready(function () {
-            $('#sortProperties').on('change', function () {
-                var id = $(this).val();
-                alert(id);
-                $.ajax({
-                    url: "/ExploreProperties/listdata/" + $('#sortProperties').val(),
-                    data: "{'id:'" + $("#sortProperties").val() + "'}",
-                    type: "POST",
-                    success: function (response) {
-                    },
-                    error: function () {
-                        alert("Error");
-                    }
-                });
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                },
+                select: function (e, i) {
+                    $("#property_district1").val(i.item.val);
+                },
+                minLength: 1
             });
         });
+    </script>
+    <script type="text/javascript">
+        $(function () {
+            $("#property_city").autocomplete({
+                source: function (request, response) {
+                    $.ajax({
+                        url: '/Home/CityAutoComplete/',
+                        data: "{'prefix': '" + request.term + "' , value:'" + $("#property_city").val() + "'}",
+                        dataType: "json",
+                        type: "POST",
+                        contentType: "application/json; charset=utf-8",
+                        success: function (data) {
+                            response($.map(data, function (item) {
+                                return item;
+                            }))
+                        },
+                        function() {
+                            alert($("#property_city").val());
+                        },
 
-    </script>*@
+                        error: function (response) {
+                            alert(response.responseText);
+                        },
+                        failure: function (response) {
+                            alert(response.responseText);
+                        }
+                    });
+                },
+                select: function (e, i) {
+                    $("#property_city1").val(i.item.val);
+                },
+                minLength: 1
+            });
+        });
+    </script>
+
+    <script type="text/javascript">
+        const viewBtn = document.querySelector(".view-modal2"),
+            popup = document.querySelector(".popup"),
+            close = popup.querySelector(".close"),
+            field = popup.querySelector(".field"),
+            input = field.querySelector("input"),
+            copy = field.querySelector("button");
+
+        viewBtn.onclick = () => {
+            popup.classList.toggle("show");
+        }
+        close.onclick = () => {
+            viewBtn.click();
+        }
+
+        copy.onclick = () => {
+            input.select(); //select input value
+            if (document.execCommand("copy")) { //if the selected text copy
+                field.classList.add("active");
+                copy.innerText = "Copied";
+                setTimeout(() => {
+                    window.getSelection().removeAllRanges(); //remove selection from document
+                    field.classList.remove("active");
+                    copy.innerText = "Copy";
+                }, 3000);
+            }
+        }
+    </script>
 </body>
 </html>

@@ -215,8 +215,8 @@ a:hover {
 }
 
 .btn-defaults{
-    background: #95c41f;
-    border: 2px solid #95c41f;
+    background: #95c41f !important;
+    border: 2px solid #95c41f !important;
 }
 
 .btn-defaults:hover {
